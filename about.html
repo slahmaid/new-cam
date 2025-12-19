@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من نحن - Prumysl</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e6b800;
+            --primary-glow: rgba(230, 184, 0, 0.4);
+            --dark-bg: #050505;
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--dark-bg); color: var(--text-main); overflow-x: hidden; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; transition:0.3s; }
+        
+        /* Shared Header/Footer CSS */
+        .floating-header {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; height: 70px; z-index: 1000;
+            background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px;
+            display: flex; justify-content: space-between; align-items: center; padding: 0 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .logo { font-size: 24px; font-weight: 900; color: #fff; position: absolute; left: 50%; transform: translateX(-50%); text-transform: uppercase; }
+        .nav-link { color: #ccc; font-weight: 700; margin: 0 10px; text-decoration: none; font-size:15px; }
+        .nav-link:hover { color: var(--primary); }
+
+        .about-hero {
+            background-color: #050505; color: white; padding: 180px 20px 80px; text-align: center;
+            background-image: radial-gradient(circle at 50% 0%, rgba(230, 184, 0, 0.1), transparent 60%);
+        }
+        .about-hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; color: #fff; }
+        .about-hero p { max-width: 700px; margin: 0 auto; font-size: 1.25rem; line-height: 1.8; color: #ccc; }
+
+        .story-section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
+        .story-section h2 { font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; color: #fff; }
+        .story-text { font-size: 1.15rem; line-height: 1.9; color: #999; margin-bottom: 25px; }
+
+        .values-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+            max-width: 1200px; margin: 50px auto 100px; padding: 0 20px;
+        }
+        .value-card {
+            background: var(--card-bg); padding: 40px 30px; border-radius: 20px; text-align: center;
+            border: 1px solid var(--glass-border); transition: 0.3s;
+        }
+        .value-card:hover { border-color: var(--primary); transform: translateY(-10px); background: rgba(255,255,255,0.05); }
+        .value-icon { font-size: 3rem; margin-bottom: 20px; display: block; filter: grayscale(100%); transition: 0.3s; }
+        .value-card:hover .value-icon { filter: grayscale(0); transform: scale(1.1); filter: drop-shadow(0 0 10px var(--primary)); }
+        .value-title { font-weight: 700; font-size: 1.3rem; margin-bottom: 15px; color: #fff; }
+        .value-card p { color: #888; font-size: 1rem; }
+
+        .site-footer { background-color: #020202; border-top: 1px solid var(--glass-border); padding: 50px 20px; color: #888; text-align: center; }
+
+        @media (max-width: 900px) { .values-grid { grid-template-columns: 1fr; } .floating-header .nav-link { display: none; } }
+    </style>
+</head>
+<body>
+    <header class="floating-header">
+        <a href="contact.html" class="nav-link">اتصل بنا</a>
+        <a href="index.html" class="logo">Prumysl</a>
+        <a href="index.html#products" class="nav-link">المنتجات</a>
+    </header>
+
+    <section class="about-hero">
+        <h1>قصتنا</h1>
+        <p>نحن <span style="color:var(--primary)">Prumysl</span>، رواد الحلول الأمنية المستدامة. نجمع بين التكنولوجيا الصناعية والطاقة النظيفة لخدمة الضيعات والمصانع في المغرب.</p>
+    </section>
+
+    <section class="story-section">
+        <h2>رؤيتنا للمستقبل</h2>
+        <p class="story-text">
+            تأسست Prumysl بهدف بسيط: توفير حلول مراقبة احترافية لا تعتمد على الشبكة الكهربائية التقليدية. لاحظنا أن أصحاب المشاريع النائية يعانون من انعدام الكهرباء وصعوبة التوصيل.
+        </p>
+        <p class="story-text">
+            من هنا جاءت فكرة Prumysl. طورنا كاميرات تعتمد كلياً على الطاقة الشمسية، مزودة ببطاريات ضخمة وشريحة 4G، لتمنحك استقلالية تامة وراحة بال، أينما كنت.
+        </p>
+    </section>
+
+    <div class="values-grid">
+        <div class="value-card">
+            <span class="value-icon">🛡️</span>
+            <div class="value-title">الجودة الصناعية</div>
+            <p>لا نبيع الأجهزة البلاستيكية. منتجاتنا مصممة لتحمل الحرارة القاسية في المغرب.</p>
+        </div>
+        <div class="value-card">
+            <span class="value-icon">🤝</span>
+            <div class="value-title">الثقة والضمان</div>
+            <p>نقدم ضماناً حقيقياً لمدة سنة كاملة مع توفر قطع الغيار وخدمة ما بعد البيع.</p>
+        </div>
+        <div class="value-card">
+            <span class="value-icon">🌍</span>
+            <div class="value-title">الاستدامة</div>
+            <p>حلولنا توفر عليك فواتير الكهرباء وتحافظ على البيئة بطاقة شمسية نظيفة.</p>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2024 Prumysl. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - Prumysl</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e6b800;
+            --primary-glow: rgba(230, 184, 0, 0.4);
+            --dark-bg: #050505;
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; outline:none; }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--dark-bg); color: var(--text-main); line-height:1.6; }
+        a { text-decoration: none; color: inherit; transition:0.3s; }
+
+        /* Shared Header/Footer CSS */
+        .floating-header {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; height: 70px; z-index: 1000;
+            background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px;
+            display: flex; justify-content: space-between; align-items: center; padding: 0 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .logo { font-size: 24px; font-weight: 900; color: #fff; position: absolute; left: 50%; transform: translateX(-50%); text-transform: uppercase; }
+        .nav-link { color: #ccc; font-weight: 700; margin: 0 10px; text-decoration: none; font-size:15px; }
+        .nav-link:hover { color: var(--primary); }
+
+        .page-header { background-color: #050505; padding: 150px 20px 60px; text-align: center; }
+        .page-header h1 { font-size: 3rem; font-weight: 900; margin-bottom: 10px; color: #fff; }
+        .page-header p { opacity: 0.7; font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+
+        .contact-container {
+            max-width: 1100px; margin: 50px auto; padding: 0 20px;
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; align-items: start;
+        }
+        
+        .contact-info {
+            background: var(--card-bg); padding: 40px; border-radius: 20px;
+            border: 1px solid var(--glass-border); height: fit-content;
+            backdrop-filter: blur(10px);
+        }
+        .info-item { margin-bottom: 35px; display: flex; align-items: flex-start; gap: 20px; }
+        .info-icon { background: rgba(230, 184, 0, 0.1); color: var(--primary); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.5rem; flex-shrink: 0; border: 1px solid rgba(230, 184, 0, 0.2); }
+        .info-text h4 { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
+        .info-text p { color: #999; font-size: 1rem; line-height: 1.6; }
+
+        .contact-form-box {
+            background: var(--card-bg); padding: 50px; border-radius: 24px;
+            border: 1px solid var(--glass-border); border-top: 4px solid var(--primary);
+            backdrop-filter: blur(10px); box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .form-label { display: block; margin-bottom: 10px; font-weight: 700; font-size: 0.95rem; color: #ccc; }
+        .form-input, .form-textarea {
+            width: 100%; padding: 16px; border: 1px solid #333; border-radius: 10px; background: #111; color: #fff;
+            font-family: inherit; font-size: 1rem; transition: 0.3s; margin-bottom: 25px;
+        }
+        .form-input:focus, .form-textarea:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 15px rgba(230,184,0,0.15); }
+        
+        .submit-btn {
+            background: var(--primary); color: #000; border: none; padding: 18px 30px;
+            font-size: 1.1rem; font-weight: 800; border-radius: 10px; cursor: pointer; transition: 0.3s; width: 100%;
+        }
+        .submit-btn:hover { box-shadow: 0 10px 30px rgba(230,184,0,0.3); transform: translateY(-3px); }
+
+        .site-footer { background-color: #020202; border-top: 1px solid var(--glass-border); padding: 50px 20px; color: #888; text-align: center; margin-top: 100px; }
+
+        @media (max-width: 900px) { .contact-container { grid-template-columns: 1fr; } .floating-header .nav-link { display: none; } }
+    </style>
+</head>
+<body>
+    <header class="floating-header">
+        <a href="about.html" class="nav-link">من نحن</a>
+        <a href="index.html" class="logo">Prumysl</a>
+        <a href="index.html#products" class="nav-link">المنتجات</a>
+    </header>
+
+    <div class="page-header">
+        <h1>تواصل معنا</h1>
+        <p>نحن هنا للإجابة على جميع استفساراتكم ومساعدتكم في اختيار الحل الأنسب لاحتياجاتكم.</p>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <div class="info-item">
+                <div class="info-icon">📞</div>
+                <div class="info-text">
+                    <h4>الهاتف</h4>
+                    <p>0600000000</p>
+                    <p style="font-size:0.85rem; opacity:0.7;">متاح من 9 صباحاً إلى 6 مساءً</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div class="info-text">
+                    <h4>المقر الرئيسي</h4>
+                    <p>الحي الصناعي سيدي معروف، الدار البيضاء، المغرب</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">💬</div>
+                <div class="info-text">
+                    <h4>واتساب</h4>
+                    <p>تواصل سريع ومباشر.</p>
+                    <a href="https://wa.me/212600000000" target="_blank" style="color:var(--primary); font-weight:700; margin-top:5px; display:inline-block;">ابدأ المحادثة &larr;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form-box">
+            <h2 style="margin-bottom:30px; color:#fff;">أرسل لنا رسالة</h2>
+            <form>
+                <div>
+                    <label class="form-label">الاسم الكامل</label>
+                    <input type="text" class="form-input" placeholder="اسمك الكريم" required>
+                </div>
+                
+                <div>
+                    <label class="form-label">رقم الهاتف</label>
+                    <input type="tel" class="form-input" placeholder="06..." required>
+                </div>
+                
+                <div>
+                    <label class="form-label">الرسالة</label>
+                    <textarea class="form-textarea" rows="5" placeholder="كيف يمكننا مساعدتك؟" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">إرسال الرسالة</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2024 Prumysl. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+</html>
