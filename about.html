@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>من نحن - Prumysl</title>
+    <title>من نحن | Prumysl - Industrial Security</title>
+    <meta name="description" content="تعرف على Prumysl، الرائد المغربي في حلول المراقبة الشمسية والأمن الصناعي.">
+    
+    <meta property="og:title" content="قصة Prumysl | الأمن بالطاقة النظيفة">
+    <meta property="og:description" content="نجمع بين التكنولوجيا الصناعية والطاقة النظيفة لخدمة الضيعات والمصانع في المغرب.">
+    <meta property="og:type" content="website">
+
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- BRAND VARIABLES --- */
         :root {
             --primary: #e6b800;
             --primary-glow: rgba(230, 184, 0, 0.4);
@@ -15,92 +23,254 @@
             --text-main: #ffffff;
             --text-muted: #a0a0a0;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Cairo', sans-serif; background-color: var(--dark-bg); color: var(--text-main); overflow-x: hidden; line-height: 1.6; }
+
+        /* --- BASE STYLES --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background-color: var(--dark-bg); 
+            color: var(--text-main); 
+            overflow-x: hidden; 
+            line-height: 1.7;
+        }
+
+        /* Grain Overlay */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 9000; opacity: 0.04;
+        }
+
+        /* Ambient Glow */
+        .ambient-glow {
+            position: fixed; width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            border-radius: 50%; pointer-events: none; z-index: -1;
+            filter: blur(100px); opacity: 0.15; top: -20%; left: 50%; transform: translateX(-50%);
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+            background: var(--primary); z-index: 9999; transition: width 0.1s;
+        }
+
         a { text-decoration: none; color: inherit; transition:0.3s; }
-        
-        /* Shared Header/Footer CSS */
+
+        /* --- NAVIGATION (Unified) --- */
         .floating-header {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; height: 70px; z-index: 1000;
-            background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px;
-            display: flex; justify-content: space-between; align-items: center; padding: 0 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px; height: 70px; z-index: 1000;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 30px;
         }
-        .logo { font-size: 24px; font-weight: 900; color: #fff; position: absolute; left: 50%; transform: translateX(-50%); text-transform: uppercase; }
-        .nav-link { color: #ccc; font-weight: 700; margin: 0 10px; text-decoration: none; font-size:15px; }
-        .nav-link:hover { color: var(--primary); }
+        .logo { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 1px; text-transform: uppercase; position: absolute; left: 50%; transform: translateX(-50%); }
+        .nav-group { display: flex; gap: 30px; align-items: center; }
+        .nav-link { color: #ccc; font-size: 15px; font-weight: 700; position: relative; }
+        .nav-link:hover { color: #fff; }
+        .mobile-toggle { display: none; cursor: pointer; font-size: 24px; color: #fff; }
 
+        /* Mobile Menu */
+        .mobile-menu-container {
+            display: none; position: fixed; top: 100px; left: 20px; right: 20px;
+            background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 16px; padding: 30px;
+            flex-direction: column; gap: 20px; text-align: center; z-index: 1001;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .mobile-menu-container.active { display: flex; animation: slideIn 0.3s ease; }
+        .mobile-link { color: #fff; font-size: 1.2rem; font-weight: 700; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- HERO SECTION --- */
         .about-hero {
-            background-color: #050505; color: white; padding: 180px 20px 80px; text-align: center;
-            background-image: radial-gradient(circle at 50% 0%, rgba(230, 184, 0, 0.1), transparent 60%);
+            position: relative; padding: 200px 20px 100px; text-align: center;
+            overflow: hidden;
         }
-        .about-hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; color: #fff; }
-        .about-hero p { max-width: 700px; margin: 0 auto; font-size: 1.25rem; line-height: 1.8; color: #ccc; }
+        .about-hero h1 { 
+            font-size: 4rem; font-weight: 900; margin-bottom: 25px; color: #fff; letter-spacing: -1px;
+            text-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+        .hero-highlight { color: var(--primary); display: inline-block; position: relative; }
+        .hero-highlight::after {
+            content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 10px;
+            background: var(--primary); opacity: 0.2; transform: skewX(-20deg);
+        }
+        .about-hero p { max-width: 700px; margin: 0 auto; font-size: 1.3rem; color: #ccc; font-weight: 300; }
 
-        .story-section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; text-align: center; }
-        .story-section h2 { font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; color: #fff; }
-        .story-text { font-size: 1.15rem; line-height: 1.9; color: #999; margin-bottom: 25px; }
+        /* --- STATS BAR (Social Proof) --- */
+        .stats-bar {
+            max-width: 1000px; margin: 0 auto 80px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 40px; text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .stat-item h3 { font-size: 3rem; font-weight: 900; color: var(--primary); margin-bottom: 5px; line-height: 1; }
+        .stat-item p { color: #888; font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
+        /* --- STORY SECTION --- */
+        .story-section { padding: 0 20px 80px; max-width: 900px; margin: 0 auto; text-align: center; }
+        .section-header { margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 15px; }
+        .section-header div { width: 60px; height: 4px; background: var(--primary); margin: 0 auto; border-radius: 10px; }
+        
+        .story-text { font-size: 1.1rem; line-height: 1.9; color: #bbb; margin-bottom: 25px; text-align: justify; text-align-last: center; }
+
+        /* --- VALUES GRID --- */
+        .values-section { padding: 80px 20px; background: rgba(255,255,255,0.015); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); }
         .values-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
-            max-width: 1200px; margin: 50px auto 100px; padding: 0 20px;
+            max-width: 1200px; margin: 0 auto;
         }
         .value-card {
-            background: var(--card-bg); padding: 40px 30px; border-radius: 20px; text-align: center;
-            border: 1px solid var(--glass-border); transition: 0.3s;
+            background: var(--card-bg); padding: 50px 30px; border-radius: 24px; text-align: center;
+            border: 1px solid var(--glass-border); transition: 0.4s; position: relative; overflow: hidden;
         }
-        .value-card:hover { border-color: var(--primary); transform: translateY(-10px); background: rgba(255,255,255,0.05); }
-        .value-icon { font-size: 3rem; margin-bottom: 20px; display: block; filter: grayscale(100%); transition: 0.3s; }
-        .value-card:hover .value-icon { filter: grayscale(0); transform: scale(1.1); filter: drop-shadow(0 0 10px var(--primary)); }
-        .value-title { font-weight: 700; font-size: 1.3rem; margin-bottom: 15px; color: #fff; }
-        .value-card p { color: #888; font-size: 1rem; }
+        .value-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(230, 184, 0, 0.1), transparent 60%);
+            opacity: 0; transition: 0.4s;
+        }
+        .value-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .value-card:hover::before { opacity: 1; }
+        
+        .value-icon { font-size: 3.5rem; margin-bottom: 25px; display: block; filter: drop-shadow(0 0 15px rgba(255,255,255,0.1)); transition: 0.3s; }
+        .value-card:hover .value-icon { transform: scale(1.1) rotate(5deg); filter: drop-shadow(0 0 20px var(--primary)); }
+        
+        .value-title { font-weight: 800; font-size: 1.4rem; margin-bottom: 15px; color: #fff; position: relative; z-index: 2; }
+        .value-desc { color: var(--text-muted); font-size: 1rem; position: relative; z-index: 2; }
 
-        .site-footer { background-color: #020202; border-top: 1px solid var(--glass-border); padding: 50px 20px; color: #888; text-align: center; }
+        /* --- CTA FOOTER --- */
+        .cta-section { padding: 100px 20px; text-align: center; }
+        .cta-box {
+            max-width: 800px; margin: 0 auto;
+            background: linear-gradient(135deg, rgba(20,20,20,0.8), rgba(10,10,10,0.95));
+            border: 1px solid var(--primary); border-radius: 30px; padding: 60px 40px;
+            box-shadow: 0 0 50px rgba(230, 184, 0, 0.15);
+        }
+        .cta-btn {
+            display: inline-block; background: var(--primary); color: #000;
+            padding: 18px 50px; font-size: 1.2rem; font-weight: 800; border-radius: 12px;
+            margin-top: 30px; transition: 0.3s; box-shadow: 0 10px 30px rgba(230, 184, 0, 0.3);
+        }
+        .cta-btn:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(230, 184, 0, 0.5); }
 
-        @media (max-width: 900px) { .values-grid { grid-template-columns: 1fr; } .floating-header .nav-link { display: none; } }
+        /* Footer & Mobile */
+        .site-footer { background-color: #020202; border-top: 1px solid var(--glass-border); padding: 50px 20px; color: #555; text-align: center; font-size: 0.9rem; }
+        
+        @media (max-width: 900px) { 
+            .nav-group { display: none; }
+            .mobile-toggle { display: block; position: absolute; right: 30px; }
+            .about-hero h1 { font-size: 2.5rem; }
+            .stats-bar, .values-grid { grid-template-columns: 1fr; gap: 20px; }
+            .stats-bar { padding: 30px; }
+        }
     </style>
 </head>
 <body>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="ambient-glow"></div>
+
     <header class="floating-header">
-        <a href="contact.html" class="nav-link">اتصل بنا</a>
+        <div class="mobile-toggle" onclick="toggleMenu()">&#9776;</div>
+        <nav class="nav-group">
+            <a href="contact.html" class="nav-link">اتصل بنا</a>
+            <a href="about.html" class="nav-link" style="color:#fff">من نحن</a>
+        </nav>
         <a href="index.html" class="logo">Prumysl</a>
-        <a href="index.html#products" class="nav-link">المنتجات</a>
+        <nav class="nav-group">
+            <a href="index.html#products" class="nav-link">كاميرات شمسية</a>
+            <a href="index.html#batteries" class="nav-link">بطاريات</a>
+        </nav>
     </header>
 
+    <div class="mobile-menu-container" id="mobileMenu">
+        <a href="index.html" class="mobile-link">الرئيسية</a>
+        <a href="index.html#products" class="mobile-link">المنتجات</a>
+        <a href="contact.html" class="mobile-link">اتصل بنا</a>
+    </div>
+
     <section class="about-hero">
-        <h1>قصتنا</h1>
-        <p>نحن <span style="color:var(--primary)">Prumysl</span>، رواد الحلول الأمنية المستدامة. نجمع بين التكنولوجيا الصناعية والطاقة النظيفة لخدمة الضيعات والمصانع في المغرب.</p>
+        <h1>الأمن الصناعي <br><span class="hero-highlight">بمفهوم جديد</span></h1>
+        <p>نحن Prumysl. نجمع بين التكنولوجيا الصناعية الصلبة والطاقة النظيفة، لنوفر حلول أمنية لا تتوقف أبداً للضيعات والمصانع المغربية.</p>
     </section>
 
-    <section class="story-section">
-        <h2>رؤيتنا للمستقبل</h2>
-        <p class="story-text">
-            تأسست Prumysl بهدف بسيط: توفير حلول مراقبة احترافية لا تعتمد على الشبكة الكهربائية التقليدية. لاحظنا أن أصحاب المشاريع النائية يعانون من انعدام الكهرباء وصعوبة التوصيل.
-        </p>
-        <p class="story-text">
-            من هنا جاءت فكرة Prumysl. طورنا كاميرات تعتمد كلياً على الطاقة الشمسية، مزودة ببطاريات ضخمة وشريحة 4G، لتمنحك استقلالية تامة وراحة بال، أينما كنت.
-        </p>
-    </section>
-
-    <div class="values-grid">
-        <div class="value-card">
-            <span class="value-icon">🛡️</span>
-            <div class="value-title">الجودة الصناعية</div>
-            <p>لا نبيع الأجهزة البلاستيكية. منتجاتنا مصممة لتحمل الحرارة القاسية في المغرب.</p>
+    <div class="stats-bar">
+        <div class="stat-item">
+            <h3>+1000</h3>
+            <p>عميل يثق بنا</p>
         </div>
-        <div class="value-card">
-            <span class="value-icon">🤝</span>
-            <div class="value-title">الثقة والضمان</div>
-            <p>نقدم ضماناً حقيقياً لمدة سنة كاملة مع توفر قطع الغيار وخدمة ما بعد البيع.</p>
+        <div class="stat-item">
+            <h3>100%</h3>
+            <p>تغطية شمسية</p>
         </div>
-        <div class="value-card">
-            <span class="value-icon">🌍</span>
-            <div class="value-title">الاستدامة</div>
-            <p>حلولنا توفر عليك فواتير الكهرباء وتحافظ على البيئة بطاقة شمسية نظيفة.</p>
+        <div class="stat-item">
+            <h3>24/7</h3>
+            <p>دعم تقني</p>
         </div>
     </div>
+
+    <section class="story-section">
+        <div class="section-header">
+            <h2>رؤيتنا للمستقبل</h2>
+            <div></div>
+        </div>
+        <p class="story-text">
+            تأسست <strong>Prumysl</strong> بهدف بسيط وحاسم: إنهاء معاناة أصحاب الضيعات والمشاريع النائية من مشاكل الكهرباء وتمديد الكابلات. لاحظنا أن الحلول الموجودة في السوق إما ضعيفة جداً (ألعاب بلاستيكية) أو معقدة للغاية ومكلفة.
+        </p>
+        <p class="story-text">
+            من هنا جاء الابتكار. طورنا كاميرات تعتمد كلياً على الطاقة الشمسية المزدوجة، مزودة ببطاريات ليثيوم صناعية وشريحة 4G، لتمنحك استقلالية تامة وراحة بال. نحن لا نبيع مجرد كاميرا، نحن نبيع "العين التي لا تنام".
+        </p>
+    </section>
+
+    <section class="values-section">
+        <div class="values-grid">
+            <div class="value-card">
+                <span class="value-icon">🛡️</span>
+                <div class="value-title">جودة عسكرية</div>
+                <p class="value-desc">لا مكان للبلاستيك هنا. هياكل معدنية وأنظمة تبريد مصممة خصيصاً لتحمل شمس الصيف الحارقة والأمطار الغزيرة (IP66).</p>
+            </div>
+            <div class="value-card">
+                <span class="value-icon">🤝</span>
+                <div class="value-title">ضمان حقيقي</div>
+                <p class="value-desc">نحن نثق في منتجاتنا، لذلك نقدم ضماناً شاملاً لمدة سنة. قطع الغيار متوفرة دائماً وفريقنا التقني رهن إشارتك.</p>
+            </div>
+            <div class="value-card">
+                <span class="value-icon">🔋</span>
+                <div class="value-title">استقلالية الطاقة</div>
+                <p class="value-desc">وفر فواتير الكهرباء وتكاليف الحفر. حلولنا تعمل ذاتياً بنسبة 100% حتى في الأيام الغائمة بفضل بطارياتنا المتطورة.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-box">
+            <h2 style="color:#fff; font-size:2.5rem; margin-bottom:20px;">جاهز لتأمين ممتلكاتك؟</h2>
+            <p style="color:#ccc; margin-bottom:0;">اكتشف مجموعتنا المختارة من الكاميرات الشمسية وابدأ في المراقبة اليوم.</p>
+            <a href="index.html#products" class="cta-btn">تصفح المنتجات</a>
+        </div>
+    </section>
 
     <footer class="site-footer">
         <p>&copy; 2024 Prumysl. جميع الحقوق محفوظة.</p>
     </footer>
+
+    <script>
+        // Scroll Progress
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("scrollProgress").style.width = scrolled + "%";
+        };
+
+        // Mobile Menu
+        function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
+    </script>
 </body>
 </html>

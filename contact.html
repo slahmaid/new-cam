@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اتصل بنا - Prumysl</title>
+    <title>تواصل معنا - Prumysl Support</title>
+    <meta name="description" content="فريق دعم Prumysl رهن إشارتكم. تواصل معنا عبر الهاتف، الواتساب أو زيارة مقرنا في الدار البيضاء.">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- BRAND VARIABLES --- */
         :root {
             --primary: #e6b800;
             --primary-glow: rgba(230, 184, 0, 0.4);
@@ -14,12 +17,38 @@
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #ffffff;
             --text-muted: #a0a0a0;
+            --success: #2ecc71;
+            --whatsapp: #25D366;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; outline:none; }
-        body { font-family: 'Cairo', sans-serif; background-color: var(--dark-bg); color: var(--text-main); line-height:1.6; }
+
+        /* --- BASE STYLES --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; outline:none; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background-color: var(--dark-bg); 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+        }
+
+        /* Grain Overlay */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 9000; opacity: 0.04;
+        }
+
+        /* Ambient Glow */
+        .ambient-glow {
+            position: fixed; width: 500px; height: 500px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            border-radius: 50%; pointer-events: none; z-index: -1;
+            filter: blur(100px); opacity: 0.1; top: 10%; right: -10%;
+        }
+
         a { text-decoration: none; color: inherit; transition:0.3s; }
 
-        /* Shared Header/Footer CSS */
+        /* --- HEADER --- */
         .floating-header {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; height: 70px; z-index: 1000;
             background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px;
@@ -28,113 +57,256 @@
         .logo { font-size: 24px; font-weight: 900; color: #fff; position: absolute; left: 50%; transform: translateX(-50%); text-transform: uppercase; }
         .nav-link { color: #ccc; font-weight: 700; margin: 0 10px; text-decoration: none; font-size:15px; }
         .nav-link:hover { color: var(--primary); }
+        .mobile-toggle { display: none; cursor: pointer; font-size: 24px; color: #fff; }
 
-        .page-header { background-color: #050505; padding: 150px 20px 60px; text-align: center; }
-        .page-header h1 { font-size: 3rem; font-weight: 900; margin-bottom: 10px; color: #fff; }
-        .page-header p { opacity: 0.7; font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+        /* Mobile Menu */
+        .mobile-menu-container {
+            display: none; position: fixed; top: 100px; left: 20px; right: 20px;
+            background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 16px; padding: 30px;
+            flex-direction: column; gap: 20px; text-align: center; z-index: 1001;
+        }
+        .mobile-menu-container.active { display: flex; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* --- PAGE HEADER --- */
+        .page-header { background-color: #050505; padding: 160px 20px 60px; text-align: center; position: relative; }
+        .page-header h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 15px; color: #fff; letter-spacing: -1px; }
+        .page-header p { opacity: 0.8; font-size: 1.25rem; max-width: 600px; margin: 0 auto; color: #ccc; }
+        
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(46, 204, 113, 0.1); border: 1px solid rgba(46, 204, 113, 0.2);
+            padding: 6px 16px; border-radius: 30px; font-size: 0.85rem; font-weight: 700;
+            color: var(--success); margin-bottom: 20px;
+        }
+        .status-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); } 100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); } }
+
+        /* --- CONTACT GRID --- */
         .contact-container {
-            max-width: 1100px; margin: 50px auto; padding: 0 20px;
-            display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; align-items: start;
+            max-width: 1100px; margin: 40px auto; padding: 0 20px;
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: start;
         }
         
-        .contact-info {
-            background: var(--card-bg); padding: 40px; border-radius: 20px;
-            border: 1px solid var(--glass-border); height: fit-content;
-            backdrop-filter: blur(10px);
-        }
-        .info-item { margin-bottom: 35px; display: flex; align-items: flex-start; gap: 20px; }
-        .info-icon { background: rgba(230, 184, 0, 0.1); color: var(--primary); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.5rem; flex-shrink: 0; border: 1px solid rgba(230, 184, 0, 0.2); }
-        .info-text h4 { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
-        .info-text p { color: #999; font-size: 1rem; line-height: 1.6; }
+        .contact-info { display: flex; flex-direction: column; gap: 20px; }
 
-        .contact-form-box {
-            background: var(--card-bg); padding: 50px; border-radius: 24px;
-            border: 1px solid var(--glass-border); border-top: 4px solid var(--primary);
-            backdrop-filter: blur(10px); box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        .info-card {
+            background: var(--card-bg); padding: 25px; border-radius: 16px;
+            border: 1px solid var(--glass-border); transition: 0.3s;
+            display: flex; align-items: flex-start; gap: 20px;
         }
-        .form-label { display: block; margin-bottom: 10px; font-weight: 700; font-size: 0.95rem; color: #ccc; }
+        .info-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .info-icon { 
+            background: rgba(230, 184, 0, 0.1); color: var(--primary); 
+            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; 
+            border-radius: 12px; font-size: 1.4rem; flex-shrink: 0; 
+        }
+        .info-text h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
+        .info-text p { color: #999; font-size: 0.95rem; }
+        .info-action { color: var(--primary); font-size: 0.85rem; font-weight: 700; margin-top: 5px; display: block; }
+
+        /* Map Embed */
+        .map-box {
+            height: 200px; width: 100%; border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--glass-border); margin-top: 10px; opacity: 0.8;
+            filter: grayscale(100%) invert(92%) contrast(83%); /* Dark Mode Map Hack */
+        }
+
+        /* --- FORM SECTION --- */
+        .contact-form-box {
+            background: rgba(20,20,20,0.8); padding: 40px; border-radius: 24px;
+            border: 1px solid var(--glass-border); border-top: 4px solid var(--primary);
+            backdrop-filter: blur(20px); box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        
+        .form-label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.9rem; color: #ccc; }
         .form-input, .form-textarea {
-            width: 100%; padding: 16px; border: 1px solid #333; border-radius: 10px; background: #111; color: #fff;
-            font-family: inherit; font-size: 1rem; transition: 0.3s; margin-bottom: 25px;
+            width: 100%; padding: 15px; border: 1px solid #333; border-radius: 10px; background: #0a0a0a; color: #fff;
+            font-family: inherit; font-size: 1rem; transition: 0.3s;
         }
         .form-input:focus, .form-textarea:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 15px rgba(230,184,0,0.15); }
         
         .submit-btn {
             background: var(--primary); color: #000; border: none; padding: 18px 30px;
             font-size: 1.1rem; font-weight: 800; border-radius: 10px; cursor: pointer; transition: 0.3s; width: 100%;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
         .submit-btn:hover { box-shadow: 0 10px 30px rgba(230,184,0,0.3); transform: translateY(-3px); }
+        .wa-icon { width: 20px; height: 20px; fill: currentColor; }
 
-        .site-footer { background-color: #020202; border-top: 1px solid var(--glass-border); padding: 50px 20px; color: #888; text-align: center; margin-top: 100px; }
+        /* --- MINI FAQ --- */
+        .mini-faq { margin-top: 40px; padding-top: 30px; border-top: 1px solid #222; }
+        .faq-title { color: #fff; font-size: 1.1rem; margin-bottom: 15px; font-weight: 700; }
+        .faq-item { margin-bottom: 15px; }
+        .faq-q { color: var(--primary); font-size: 0.95rem; font-weight: 600; cursor: pointer; }
+        .faq-a { color: #888; font-size: 0.9rem; margin-top: 5px; display: none; }
+        .faq-item.active .faq-a { display: block; animation: fadeIn 0.3s; }
 
-        @media (max-width: 900px) { .contact-container { grid-template-columns: 1fr; } .floating-header .nav-link { display: none; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .site-footer { background-color: #020202; border-top: 1px solid var(--glass-border); padding: 50px 20px; color: #555; text-align: center; margin-top: 80px; font-size: 0.9rem; }
+
+        @media (max-width: 900px) { 
+            .nav-link { display: none; }
+            .mobile-toggle { display: block; position: absolute; right: 30px; }
+            .contact-container { grid-template-columns: 1fr; } 
+            .form-grid { grid-template-columns: 1fr; gap: 0; }
+            .page-header h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
+
+    <div class="ambient-glow"></div>
+
     <header class="floating-header">
+        <div class="mobile-toggle" onclick="toggleMenu()">&#9776;</div>
         <a href="about.html" class="nav-link">من نحن</a>
         <a href="index.html" class="logo">Prumysl</a>
         <a href="index.html#products" class="nav-link">المنتجات</a>
     </header>
 
+    <div class="mobile-menu-container" id="mobileMenu">
+        <a href="index.html" class="nav-link" style="display:block; border-bottom:1px solid #222; padding:15px;">الرئيسية</a>
+        <a href="index.html#products" class="nav-link" style="display:block; border-bottom:1px solid #222; padding:15px;">المنتجات</a>
+        <a href="about.html" class="nav-link" style="display:block; padding:15px;">من نحن</a>
+    </div>
+
     <div class="page-header">
+        <div class="status-badge" id="statusBadge">
+            <span class="status-dot"></span> <span id="statusText">متاحون الآن للرد</span>
+        </div>
         <h1>تواصل معنا</h1>
-        <p>نحن هنا للإجابة على جميع استفساراتكم ومساعدتكم في اختيار الحل الأنسب لاحتياجاتكم.</p>
+        <p>نحن هنا للإجابة على جميع استفساراتكم التقنية والتجارية. فريقنا جاهز لمساعدتك في اختيار الحل الأنسب لضيعتك أو مصنعك.</p>
     </div>
 
     <div class="contact-container">
+        
         <div class="contact-info">
-            <div class="info-item">
+            <a href="tel:0600000000" class="info-card">
                 <div class="info-icon">📞</div>
                 <div class="info-text">
-                    <h4>الهاتف</h4>
-                    <p>0600000000</p>
-                    <p style="font-size:0.85rem; opacity:0.7;">متاح من 9 صباحاً إلى 6 مساءً</p>
+                    <h4>الهاتف المباشر</h4>
+                    <p>اتصل بنا لأي استفسار عاجل.</p>
+                    <span class="info-action">0600000000</span>
                 </div>
-            </div>
-            <div class="info-item">
-                <div class="info-icon">📍</div>
+            </a>
+            
+            <a href="mailto:support@prumysl.store" class="info-card">
+                <div class="info-icon">✉️</div>
                 <div class="info-text">
-                    <h4>المقر الرئيسي</h4>
-                    <p>الحي الصناعي سيدي معروف، الدار البيضاء، المغرب</p>
+                    <h4>البريد الإلكتروني</h4>
+                    <p>لطلبات عروض الأسعار (Devis).</p>
+                    <span class="info-action">support@prumysl.store</span>
                 </div>
-            </div>
-            <div class="info-item">
-                <div class="info-icon">💬</div>
-                <div class="info-text">
-                    <h4>واتساب</h4>
-                    <p>تواصل سريع ومباشر.</p>
-                    <a href="https://wa.me/212600000000" target="_blank" style="color:var(--primary); font-weight:700; margin-top:5px; display:inline-block;">ابدأ المحادثة &larr;</a>
+            </a>
+            
+            <div class="info-card" style="flex-direction: column; gap:15px;">
+                <div style="display:flex; gap:20px; align-items:center;">
+                    <div class="info-icon">📍</div>
+                    <div class="info-text">
+                        <h4>المقر الرئيسي</h4>
+                        <p>الحي الصناعي سيدي معروف، الدار البيضاء</p>
+                    </div>
                 </div>
+                <iframe class="map-box" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3325.274384074254!2d-7.663363684801124!3d33.54625298074665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda62d1d2b07e5d1%3A0x6b3b2c686866601!2sSidi%20Ma%C3%A2rouf%2C%20Casablanca!5e0!3m2!1sen!2sma!4v1625680000000!5m2!1sen!2sma" loading="lazy"></iframe>
             </div>
         </div>
 
         <div class="contact-form-box">
-            <h2 style="margin-bottom:30px; color:#fff;">أرسل لنا رسالة</h2>
-            <form>
-                <div>
-                    <label class="form-label">الاسم الكامل</label>
-                    <input type="text" class="form-input" placeholder="اسمك الكريم" required>
+            <h2 style="margin-bottom:10px; color:#fff;">أرسل لنا رسالة</h2>
+            <p style="color:#888; margin-bottom:30px; font-size:0.95rem;">سنقوم بالرد عليك عبر الواتساب فور استلام رسالتك.</p>
+            
+            <form onsubmit="sendWhatsApp(event)">
+                <div class="form-grid">
+                    <div>
+                        <label class="form-label">الاسم الكامل</label>
+                        <input type="text" id="name" class="form-input" placeholder="الاسم" required>
+                    </div>
+                    <div>
+                        <label class="form-label">رقم الهاتف</label>
+                        <input type="tel" id="phone" class="form-input" placeholder="06..." required>
+                    </div>
                 </div>
                 
-                <div>
-                    <label class="form-label">رقم الهاتف</label>
-                    <input type="tel" class="form-input" placeholder="06..." required>
+                <div style="margin-bottom:25px;">
+                    <label class="form-label">نوع الاستفسار</label>
+                    <select id="topic" class="form-input" style="cursor:pointer;">
+                        <option value="استفسار عام">استفسار عام</option>
+                        <option value="دعم تقني">دعم تقني / صيانة</option>
+                        <option value="طلب بالجملة">طلب بالجملة (B2B)</option>
+                    </select>
                 </div>
                 
-                <div>
+                <div style="margin-bottom:25px;">
                     <label class="form-label">الرسالة</label>
-                    <textarea class="form-textarea" rows="5" placeholder="كيف يمكننا مساعدتك؟" required></textarea>
+                    <textarea id="msg" class="form-textarea" rows="4" placeholder="اكتب رسالتك هنا..." required></textarea>
                 </div>
                 
-                <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                <button type="submit" class="submit-btn">
+                    <svg class="wa-icon" viewBox="0 0 32 32"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.475.642 4.85 1.863 6.963L2.3 29.7l6.9-1.808A13.926 13.926 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"/></svg>
+                    إرسال عبر الواتساب
+                </button>
             </form>
+
+            <div class="mini-faq">
+                <div class="faq-title">أسئلة سريعة</div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-q">+ هل يوجد توصيل خارج الدار البيضاء؟</div>
+                    <div class="faq-a">نعم، نقوم بالتوصيل لجميع المدن المغربية عبر أمانة أو خدمات خاصة.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-q">+ هل الكاميرات تأتي مع ضمان؟</div>
+                    <div class="faq-a">نعم، جميع منتجات Prumysl تأتي مع ضمان لمدة سنة كاملة.</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer class="site-footer">
         <p>&copy; 2024 Prumysl. جميع الحقوق محفوظة.</p>
     </footer>
+
+    <script>
+        // 1. WhatsApp Logic
+        function sendWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const topic = document.getElementById('topic').value;
+            const msg = document.getElementById('msg').value;
+
+            const text = `*رسالة جديدة من الموقع* 📩%0A%0A` +
+                         `*الاسم:* ${name}%0A` +
+                         `*الهاتف:* ${phone}%0A` +
+                         `*الموضوع:* ${topic}%0A` +
+                         `------------------%0A` +
+                         `*الرسالة:* ${msg}`;
+
+            window.open(`https://wa.me/212600000000?text=${text}`, '_blank');
+        }
+
+        // 2. Business Hours Logic
+        const date = new Date();
+        const hour = date.getHours();
+        const badge = document.getElementById('statusBadge');
+        const statusText = document.getElementById('statusText');
+        
+        // Open between 9AM and 7PM
+        if (hour < 9 || hour >= 19) {
+            badge.style.borderColor = 'rgba(150, 150, 150, 0.2)';
+            badge.style.color = '#888';
+            badge.querySelector('.status-dot').style.backgroundColor = '#888';
+            badge.querySelector('.status-dot').style.animation = 'none';
+            statusText.innerText = "خارج أوقات العمل (اترك رسالة)";
+        }
+
+        // 3. Mobile Menu
+        function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
+    </script>
 </body>
 </html>
