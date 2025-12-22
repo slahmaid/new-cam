@@ -148,17 +148,21 @@ const PRODUCTS_DB = {
                     <p>هذه الكاميرا تأتي بعدستين ثابتتين لمراقبة الزوايا المهمة وعدسة ثالثة متحركة (PTZ) تتبع الحركة 360 درجة.</p>
                     <div class="highlight-box"><strong style="color:var(--primary)">🎯 النتيجة:</strong> لا توجد نقاط عمياء نهائياً.</div>
                 </div>
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=App+View:+3+Screens" alt="3 Screen App View" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Omni-Guard 360°.jpg" alt="3 Screen App View" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=AI+Tracking+Demo" alt="AI Human Tracking" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Omni-Guard 360°/Prumysl Omni-Guard 360°-main.jpg" alt="AI Human Tracking" class="desc-img"></div>
                 <div class="desc-text">
                     <h3>ذكاء اصطناعي يتتبع المتسللين</h3>
                     <p>بمجرد دخول شخص غريب، تقوم الكاميرا بالدوران تلقائياً لتتبعه وترسل لك تنبيهاً فورياً.</p>
                 </div>
             </div>
         `,
-        images: ["img/Prumysl Omni-Guard 360°.jpg", "https://placehold.co/800x800/111/e6b800?text=3+Lens+Closeup", "https://placehold.co/800x800/111/e6b800?text=Installation+Shot"], 
+        images: [
+            "img/Prumysl Omni-Guard 360°.jpg", 
+            "img/Prumysl Omni-Guard 360°/Prumysl Omni-Guard 360°-main.jpg",
+            "img/Prumysl Omni-Guard 360°/Prumysl Omni-Guard 360°-thumb-2.jpg"
+        ], 
         specs: { "الدقة": "15 MP (3x5MP)", "البطارية": "8000 mAh Industrial", "الاتصال": "4G / LTE", "اللوح الشمسي": "16W High Efficiency", "الرؤية الليلية": "Color + IR (30m)" } 
     },
     2: { 
@@ -169,14 +173,19 @@ const PRODUCTS_DB = {
         fullDesc: `
             <div class="desc-grid">
                 <div class="desc-text"><h3>دقة 6K: التفاصيل تصنع الفرق</h3><p>كاميرا Vision 6K Pro تعطيك صورة كريستالية تمكنك من قراءة لوحات السيارات.</p></div>
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=6K+Resolution" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-main.jpg" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=Zoom+10X" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-thumb-1.jpg" class="desc-img"></div>
                 <div class="desc-text"><h3>زووم هجين 10X</h3><p>قرب الصورة 10 مرات دون أن تفقد المشهد العام.</p><div class="highlight-box"><strong style="color:var(--primary)">🛡️ ردع فوري:</strong> صافرات إنذار وأضواء كاشفة.</div></div>
             </div>
         `,
-        images: ["img/Prumysl Vision 6K Pro.jpg", "https://placehold.co/800x800/111/e6b800?text=Night+Vision", "https://placehold.co/800x800/111/e6b800?text=App+Interface"], 
+        images: [
+            "img/Prumysl Vision 6K Pro.jpg", 
+            "img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-thumb-1.jpg", 
+            "img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-thumb-2.jpg",
+            "img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-main.jpg"
+        ], 
         specs: { "الدقة": "6K Ultra HD", "الزووم": "10X Hybrid Zoom", "البطارية": "8000 mAh", "العدسات": "Triple Lens System", "التخزين": "SD Card / Cloud" } 
     },
     3: { 
@@ -187,14 +196,19 @@ const PRODUCTS_DB = {
         fullDesc: `
              <div class="desc-grid">
                 <div class="desc-text"><h3>أناقة التصميم الأوروبي</h3><p>تصميم مدمج (All-in-One) حيث البطاريات والألواح الشمسية مدمجة بشكل انسيابي.</p></div>
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=Villa+Installation" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Euro-Shield/Prumysl Euro-Shield-thumb-1.jpg" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=Dual+Panel" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Euro-Shield/Prumysl Euro-Shield-thumb-2.jpg" class="desc-img"></div>
                 <div class="desc-text"><h3>تقنية اللوح المزدوج</h3><p>لوحين شمسيين لشحن أسرع بـ 50%.</p><div class="highlight-box"><strong style="color:var(--primary)">⚡ شتاء آمن:</strong> تعمل بكفاءة في الأيام الغائمة.</div></div>
             </div>
         `,
-        images: ["img/Prumysl Euro-Shield.jpg", "https://placehold.co/800x800/111/e6b800?text=Side+View", "https://placehold.co/800x800/111/e6b800?text=Mounting"], 
+        images: [
+            "img/Prumysl Euro-Shield.jpg", 
+            "img/Prumysl Euro-Shield/Prumysl Euro-Shield-main.jpg", 
+            "img/Prumysl Euro-Shield/Prumysl Euro-Shield-thumb-1.jpg", 
+            "img/Prumysl Euro-Shield/Prumysl Euro-Shield-thumb-2.jpg"
+        ], 
         specs: { "التصميم": "Compact Euro Design", "الطاقة": "Dual Panel Tech", "البطارية": "Built-in Long Life", "الاتصال": "4G / LTE", "مقاومة الماء": "IP66" } 
     },
     4: { 
@@ -205,14 +219,19 @@ const PRODUCTS_DB = {
         fullDesc: `
             <div class="desc-grid">
                 <div class="desc-text"><h3>طاقة جبارة: ألواح 18W</h3><p>تأتي Duo بلوح ضخم بقوة 18 واط، مما يجعلها الخيار الأفضل للمناطق قليلة الشمس.</p></div>
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=18W+Panel" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Duo 18W/Prumysl Duo 18W-main.jpg" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=Split+Installation" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Duo 18W/Prumysl Duo 18W-thumb-2.jpg" class="desc-img"></div>
                 <div class="desc-text"><h3>تركيب منفصل</h3><p>تأتي مع كابل تمديد لوضع اللوح في الشمس والكاميرا في الظل.</p></div>
             </div>
         `,
-        images: ["img/Prumysl Duo 18W.jpg", "https://placehold.co/800x800/111/e6b800?text=Cable+Kit", "https://placehold.co/800x800/111/e6b800?text=Dual+Lens"], 
+        images: [
+            "img/Prumysl Duo 18W.jpg", 
+            "img/Prumysl Duo 18W/Prumysl Duo 18W-thumb-1.jpg", 
+            "img/Prumysl Duo 18W/Prumysl Duo 18W-thumb-2.jpg",
+            "img/Prumysl Duo 18W/Prumysl Duo 18W-main.jpg"
+        ], 
         specs: { "الطاقة": "18W Split Panel", "النوع": "Dual Lens PTZ", "الدقة": "15 MP", "البطارية": "8000 mAh", "المستشعر": "PIR Motion" } 
     },
     5: { 
@@ -223,14 +242,19 @@ const PRODUCTS_DB = {
         fullDesc: `
             <div class="desc-grid">
                 <div class="desc-text"><h3>زووم بصري 36X (حقيقي)</h3><p>زووم بصري بعدسات متحركة (Optical Zoom) مثل الكاميرات الاحترافية.</p><div class="highlight-box"><strong style="color:var(--primary)">🔭 المدى:</strong> تغطية تصل إلى 1 كيلومتر.</div></div>
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=36X+Optical+Zoom" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-1.jpg" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=Metal+Body" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-2.jpg" class="desc-img"></div>
                 <div class="desc-text"><h3>دبابة مدرعة (Full Metal)</h3><p>جسم معدني كامل مصمم لتحمل حرارة الصحراء والصدمات.</p></div>
             </div>
         `,
-        images: ["img/Prumysl Falcon 36X.jpg", "https://placehold.co/800x800/111/e6b800?text=Long+Range+Test", "https://placehold.co/800x800/111/e6b800?text=Robust+Mount"], 
+        images: [
+            "img/Prumysl Falcon 36X.jpg", 
+            "img/Prumysl Falcon 36X/Prumysl Falcon 36X-main.jpg", 
+            "img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-1.jpg", 
+            "img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-2.jpg"
+        ], 
         specs: { "الزووم": "36X Optical", "البطارية": "12000 mAh", "الهيكل": "Full Metal Alloy", "الدقة": "24 MP", "المدى": "Up to 1KM" } 
     },
     'batteries': { 
@@ -241,18 +265,22 @@ const PRODUCTS_DB = {
         fullDesc: `
             <div class="desc-grid">
                 <div class="desc-text"><h3>شحن مباشر وسهل (USB-C)</h3><p>منفذ Type-C مدمج في البطارية نفسها. اشحنها بكابل هاتفك.</p></div>
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=USB-C+Port" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/OFFER-2.jpg" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="https://placehold.co/600x400/111/e6b800?text=Comparison" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/OFFER-1.jpg" class="desc-img"></div>
                 <div class="desc-text"><h3>سعة حقيقية 5100mWh</h3><div class="highlight-box"><strong style="color:var(--primary)">💰 توفير هائل:</strong> بطارية واحدة = 1200 بطارية عادية.</div></div>
             </div>
         `,
-        images: ["img/Rechargeable-batteries.png", "https://placehold.co/800x800/111/e6b800?text=USB-C+Cable", "https://placehold.co/800x800/111/e6b800?text=Usage"], 
+        images: [
+            "img/Rechargeable-batteries.png", 
+            "img/OFFER-1.jpg", 
+            "img/OFFER-2.jpg"
+        ], 
         specs: { "النوع": "Li-Ion 21700", "الطاقة": "5100 mWh", "الفولت": "1.5V Constant", "منفذ الشحن": "USB-C Built-in", "العمر": "1200+ Cycles" },
         offers: [
-            { title: "باك التجربة (2 حبات)", price: "149 DH", oldPrice: "199 DH", img: "https://placehold.co/600x600/222/e6b800?text=Pack+of+2" }, 
-            { title: "باك التوفير (4 حبات + كابل)", price: "249 DH", oldPrice: "398 DH", img: "https://placehold.co/600x600/222/e6b800?text=Pack+of+4+Promo" }
+            { title: "باك التجربة (2 حبات)", price: "149 DH", oldPrice: "199 DH", img: "img/OFFER-1.jpg" }, 
+            { title: "باك التوفير (4 حبات + كابل)", price: "249 DH", oldPrice: "398 DH", img: "img/OFFER-2.jpg" }
         ] 
     }
 };
