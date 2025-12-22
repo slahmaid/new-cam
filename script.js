@@ -265,10 +265,10 @@ const PRODUCTS_DB = {
         fullDesc: `
             <div class="desc-grid">
                 <div class="desc-text"><h3>شحن مباشر وسهل (USB-C)</h3><p>منفذ Type-C مدمج في البطارية نفسها. اشحنها بكابل هاتفك.</p></div>
-                <div class="desc-img-box"><img src="img/OFFER-2.jpg" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Feature-1.jpg" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="img/OFFER-1.jpg" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Feature-2.jpg" class="desc-img"></div>
                 <div class="desc-text"><h3>سعة حقيقية 5100mWh</h3><div class="highlight-box"><strong style="color:var(--primary)">💰 توفير هائل:</strong> بطارية واحدة = 1200 بطارية عادية.</div></div>
             </div>
         `,
