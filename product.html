@@ -10,6 +10,11 @@
 </head>
 <body>
 
+    <div id="preloader" class="preloader">
+        <div class="spinner"></div>
+        <div class="loader-logo">Prumysl</div>
+    </div>
+
     <div class="scroll-progress" id="scrollProgress"></div>
 
     <header class="floating-header full-width">
@@ -32,85 +37,121 @@
         <div class="product-info">
             <span class="product-category">INDUSTRIAL GRADE SECURITY</span>
             <h1 id="p-title" class="product-title-page">...</h1>
-            
             <div class="social-proof-banner">
                 <span class="live-dot"></span>
-                <span id="view-counter">12</span> شخص يشاهدون هذا المنتج حالياً
+                <span id="view-counter">12</span> شخص يشاهدون هذا المنتج الآن
             </div>
-            
-            <div id="offers-container" class="offers-container"></div>
 
+            <div id="offers-container" class="offers-container"></div>
+            
             <div class="price-box">
                 <span id="p-price" class="current-price">...</span>
                 <span id="p-old-price" class="old-price">...</span>
-                <span class="discount-tag">توفير 20%</span>
+                <span class="discount-tag">تخفيض محدود</span>
             </div>
+
+            <p id="p-desc" style="color:var(--text-muted); font-size:1.1rem; margin-bottom:25px; line-height:1.7;">Loading details...</p>
 
             <div class="timer-box">
-                <span>⚡ عرض محدود ينتهي خلال:</span>
-                <span class="countdown-digits" id="countdown">04:59:00</span>
+                <span>🔥 ينتهي العرض خلال:</span>
+                <span id="countdown" class="countdown-digits">03:59:00</span>
             </div>
 
-            <p id="p-desc" style="color:var(--text-muted); line-height:1.8; margin-bottom:30px; font-size:1.05rem;">...</p>
-
-            <div class="order-card" id="orderForm">
+            <div class="order-card">
                 <div class="order-header">
                     <h4>أطلب الآن والدفع عند الاستلام</h4>
-                    <p style="font-size:0.85rem; color:var(--text-muted);">التوصيل مجاني وسريع لجميع المدن 🇲🇦</p>
+                    <p style="font-size:0.85rem; color:var(--text-muted);">التوصيل مجاني لجميع المدن المغربية 🇲🇦</p>
                 </div>
                 <form onsubmit="sendToWhatsApp(event)">
-                    <input type="text" id="order-name" class="form-input" placeholder="الاسم الكامل" required>
+                    <input type="hidden" id="selected-variant" value="Standard">
+                    <label class="form-label">الاسم الكامل</label>
+                    <input type="text" id="order-name" class="form-input" placeholder="الاسم" required>
+                    
+                    <label class="form-label">المدينة</label>
                     <input type="text" id="order-city" class="form-input" placeholder="المدينة" required>
+                    
+                    <label class="form-label">رقم الهاتف</label>
                     <input type="tel" id="order-phone" class="form-input" placeholder="رقم الهاتف (06...)" required>
-                    <input type="hidden" id="selected-variant" name="variant" value="">
                     
                     <button type="submit" class="submit-btn">
-                        <span>اضغط هنا للطلب</span>
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        <span>أكد الطلب الآن</span>
+                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </button>
                 </form>
                 <div class="wa-link">
-                    هل لديك سؤال؟ <a href="#" id="wa-help-btn" target="_blank">تحدث معنا عبر الواتساب</a>
+                    هل تحتاج مساعدة؟ <a href="#" id="wa-help-btn" target="_blank">تحدث معنا عبر الواتساب</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="product-container" style="display:block; margin-bottom:40px;">
+    <div style="max-width:1200px; margin:0 auto 60px; padding:0 20px;">
         <div class="tabs-header">
-            <button class="tab-btn active" onclick="switchTab('desc')">الوصف الكامل</button>
-            <button class="tab-btn" onclick="switchTab('specs')">المواصفات التقنية</button>
-            <button class="tab-btn" onclick="switchTab('shipping')">الشحن والضمان</button>
+            <button class="tab-btn active" onclick="openTab(event, 'desc-tab')">الوصف الكامل</button>
+            <button class="tab-btn" onclick="openTab(event, 'specs-tab')">المواصفات التقنية</button>
         </div>
-        <div id="tab-desc" class="tab-content active"><div id="full-desc-text">...</div></div>
-        <div id="tab-specs" class="tab-content"><table class="specs-table"><tbody id="specs-body"></tbody></table></div>
-        <div id="tab-shipping" class="tab-content">
-            <div style="background:#fff; padding:20px; border-radius:12px; border:1px solid var(--border-light);">
-                <p style="margin-bottom:15px;"><strong>📦 التوصيل السريع:</strong> يتم التوصيل خلال 24 إلى 48 ساعة في المدن الكبرى و 3 أيام لباقي المناطق.</p>
-                <p style="margin-bottom:15px;"><strong>🛡️ ضمان الجودة:</strong> جميع منتجات Prumysl تأتي مع ضمان شامل لمدة سنة كاملة ضد عيوب التصنيع.</p>
-                <p><strong>💰 الدفع:</strong> الدفع نقداً عند استلام المنتج والتأكد منه.</p>
-            </div>
+        
+        <div id="desc-tab" class="tab-content active">
+            <div id="full-desc-text"></div>
+        </div>
+        
+        <div id="specs-tab" class="tab-content">
+            <table class="specs-table">
+                <tbody id="specs-body"></tbody>
+            </table>
         </div>
     </div>
 
-    <section class="related-section">
-        <h2 style="color:var(--text-main); text-align:center; margin-bottom:40px; font-weight:900; font-size:1.8rem;">منتجات قد تعجبك أيضاً</h2>
+    <div class="related-section">
+        <h3 class="section-title" style="font-size:1.8rem; margin-bottom:40px;">منتجات قد تعجبك</h3>
         <div class="related-grid" id="related-grid"></div>
-    </section>
+    </div>
 
     <div class="mobile-sticky-bar">
-        <div>
-            <div style="font-size:0.75rem; color:var(--text-muted);">السعر الإجمالي</div>
-            <div id="m-price" class="m-price">...</div>
-        </div>
-        <div style="display:flex; gap:10px; flex-grow:1; justify-content: flex-end;">
-            <a href="#" id="wa-btn-mobile" class="m-wa-btn" aria-label="WhatsApp">
-                <svg viewBox="0 0 32 32" style="fill:currentColor; width:24px;"><path d="M16 2C8.269 2 2 8.269 2 16c0 2.485.643 4.821 1.764 6.845L2.1 29.9l7.247-1.62C11.306 29.357 13.585 30 16 30c7.731 0 14-6.269 14-14S23.731 2 16 2zm0 25.867c-2.14 0-4.162-.57-5.918-1.564l-.424-.24-4.398.983 1.01-4.29-.264-.442A11.82 11.82 0 014.133 16c0-6.543 5.324-11.867 11.867-11.867S27.867 9.457 27.867 16 22.543 27.867 16 27.867z"/></svg>
-            </a>
-            <a href="#orderForm" class="m-btn">اطلب الآن</a>
-        </div>
+        <div class="m-price" id="m-price">...</div>
+        <a href="#" id="wa-btn-mobile" class="m-wa-btn" target="_blank">
+            <svg viewBox="0 0 32 32" style="width:24px;height:24px;fill:#25D366;"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.475.642 4.85 1.863 6.963L2.3 29.7l6.9-1.808A13.926 13.926 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"/></svg>
+        </a>
+        <button onclick="document.querySelector('.order-card').scrollIntoView({behavior:'smooth'})" class="m-btn">اطلب الآن</button>
     </div>
 
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>PRUMYSL</h3>
+                <p>حلول الطاقة الشمسية والأمن الذكي.<br>مصممة للمصانع، الضيعات، والمنازل.</p>
+            </div>
+            <div class="footer-col">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="index.html#products">المنتجات</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>تواصل معنا</h3>
+                <ul>
+                    <li>الهاتف: 0600000000</li>
+                    <li>البريد: info@prumysl.store</li>
+                    <li>العنوان: الدار البيضاء، المغرب</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Prumysl. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
+    <script>
+        function openTab(evt, tabName) {
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+    </script>
 </body>
 </html>
