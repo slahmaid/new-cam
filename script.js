@@ -242,10 +242,10 @@ const PRODUCTS_DB = {
         fullDesc: `
             <div class="desc-grid">
                 <div class="desc-text"><h3>زووم بصري 36X (حقيقي)</h3><p>زووم بصري بعدسات متحركة (Optical Zoom) مثل الكاميرات الاحترافية.</p><div class="highlight-box"><strong style="color:var(--primary)">🔭 المدى:</strong> تغطية تصل إلى 1 كيلومتر.</div></div>
-                <div class="desc-img-box"><img src="img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-1.jpg" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Falcon 36X/Prumysl Falcon 36X-desc-1.jpeg" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-2.jpg" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Falcon 36X/Prumysl Falcon 36X-desc-2.jpeg" class="desc-img"></div>
                 <div class="desc-text"><h3>دبابة مدرعة (Full Metal)</h3><p>جسم معدني كامل مصمم لتحمل حرارة الصحراء والصدمات.</p></div>
             </div>
         `,
