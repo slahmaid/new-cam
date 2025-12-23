@@ -256,33 +256,8 @@ const PRODUCTS_DB = {
             "img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-2.jpg"
         ], 
         specs: { "الزووم": "36X Optical", "البطارية": "12000 mAh", "الهيكل": "Full Metal Alloy", "الدقة": "24 MP", "المدى": "Up to 1KM" } 
-    },
-    'batteries': { 
-        title: "بطاريات Prumysl Li-Ion القابلة للشحن (USB-C)", 
-        price: "149 DH", 
-        oldPrice: "199 DH", 
-        desc: "بطاريات ليثيوم 21700 مع منفذ شحن مباشر USB-C. سعة حقيقية 5100mWh.", 
-        fullDesc: `
-            <div class="desc-grid">
-                <div class="desc-text"><h3>شحن مباشر وسهل (USB-C)</h3><p>منفذ Type-C مدمج في البطارية نفسها. اشحنها بكابل هاتفك.</p></div>
-                <div class="desc-img-box"><img src="img/Feature-1.jpg" class="desc-img"></div>
-            </div>
-            <div class="desc-grid">
-                <div class="desc-img-box"><img src="img/Feature-2.jpg" class="desc-img"></div>
-                <div class="desc-text"><h3>سعة حقيقية 5100mWh</h3><div class="highlight-box"><strong style="color:var(--primary)">💰 توفير هائل:</strong> بطارية واحدة = 1200 بطارية عادية.</div></div>
-            </div>
-        `,
-        images: [
-            "img/Rechargeable-batteries.png", 
-            "img/OFFER-1.jpg", 
-            "img/OFFER-2.jpg"
-        ], 
-        specs: { "النوع": "Li-Ion 21700", "الطاقة": "5100 mWh", "الفولت": "1.5V Constant", "منفذ الشحن": "USB-C Built-in", "العمر": "1200+ Cycles" },
-        offers: [
-            { title: "باك التجربة (2 حبات)", price: "149 DH", oldPrice: "199 DH", img: "img/OFFER-1.jpg" }, 
-            { title: "باك التوفير (4 حبات + كابل)", price: "249 DH", oldPrice: "398 DH", img: "img/OFFER-2.jpg" }
-        ] 
     }
+    // BATTERIES OBJECT REMOVED
 };
 
 function initProductPage() {
