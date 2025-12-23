@@ -252,7 +252,7 @@ const PRODUCTS_DB = {
         images: [
             "img/Prumysl Falcon 36X.jpg", 
             "img/Prumysl Falcon 36X/Prumysl Falcon 36X-main.jpg", 
-            "img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-1.jpg", 
+            "img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-1.jpeg", 
             "img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-2.jpg"
         ], 
         specs: { "الزووم": "36X Optical", "البطارية": "12000 mAh", "الهيكل": "Full Metal Alloy", "الدقة": "24 MP", "المدى": "Up to 1KM" } 
