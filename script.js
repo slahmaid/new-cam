@@ -148,10 +148,10 @@ const PRODUCTS_DB = {
                     <p>هذه الكاميرا تأتي بعدستين ثابتتين لمراقبة الزوايا المهمة وعدسة ثالثة متحركة (PTZ) تتبع الحركة 360 درجة.</p>
                     <div class="highlight-box"><strong style="color:var(--primary)">🎯 النتيجة:</strong> لا توجد نقاط عمياء نهائياً.</div>
                 </div>
-                <div class="desc-img-box"><img src="img/Prumysl Omni-Guard 360°.jpg" alt="3 Screen App View" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Omni-Guard 360°/Prumysl Omni-Guard 360°-desc-1.jpeg" alt="3 Screen App View" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="img/Prumysl Omni-Guard 360°/Prumysl Omni-Guard 360°-main.jpg" alt="AI Human Tracking" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Omni-Guard 360°/Prumysl Omni-Guard 360°-desc-2.jpg" alt="AI Human Tracking" class="desc-img"></div>
                 <div class="desc-text">
                     <h3>ذكاء اصطناعي يتتبع المتسللين</h3>
                     <p>بمجرد دخول شخص غريب، تقوم الكاميرا بالدوران تلقائياً لتتبعه وترسل لك تنبيهاً فورياً.</p>
@@ -173,10 +173,10 @@ const PRODUCTS_DB = {
         fullDesc: `
             <div class="desc-grid">
                 <div class="desc-text"><h3>دقة 6K: التفاصيل تصنع الفرق</h3><p>كاميرا Vision 6K Pro تعطيك صورة كريستالية تمكنك من قراءة لوحات السيارات.</p></div>
-                <div class="desc-img-box"><img src="img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-main.jpg" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-desc-1.jpeg" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-thumb-1.jpg" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-desc-2.jpeg" class="desc-img"></div>
                 <div class="desc-text"><h3>زووم هجين 10X</h3><p>قرب الصورة 10 مرات دون أن تفقد المشهد العام.</p><div class="highlight-box"><strong style="color:var(--primary)">🛡️ ردع فوري:</strong> صافرات إنذار وأضواء كاشفة.</div></div>
             </div>
         `,
@@ -196,10 +196,10 @@ const PRODUCTS_DB = {
         fullDesc: `
              <div class="desc-grid">
                 <div class="desc-text"><h3>أناقة التصميم الأوروبي</h3><p>تصميم مدمج (All-in-One) حيث البطاريات والألواح الشمسية مدمجة بشكل انسيابي.</p></div>
-                <div class="desc-img-box"><img src="img/Prumysl Euro-Shield/Prumysl Euro-Shield-thumb-1.jpg" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Euro-Shield/Prumysl Euro-Shield-desc-1.jpeg" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="img/Prumysl Euro-Shield/Prumysl Euro-Shield-thumb-2.jpg" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Euro-Shield/Prumysl Euro-Shield-desc-2.jpeg" class="desc-img"></div>
                 <div class="desc-text"><h3>تقنية اللوح المزدوج</h3><p>لوحين شمسيين لشحن أسرع بـ 50%.</p><div class="highlight-box"><strong style="color:var(--primary)">⚡ شتاء آمن:</strong> تعمل بكفاءة في الأيام الغائمة.</div></div>
             </div>
         `,
@@ -219,10 +219,10 @@ const PRODUCTS_DB = {
         fullDesc: `
             <div class="desc-grid">
                 <div class="desc-text"><h3>طاقة جبارة: ألواح 18W</h3><p>تأتي Duo بلوح ضخم بقوة 18 واط، مما يجعلها الخيار الأفضل للمناطق قليلة الشمس.</p></div>
-                <div class="desc-img-box"><img src="img/Prumysl Duo 18W/Prumysl Duo 18W-main.jpg" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Duo 18W/Prumysl Duo 18W-desc-1.jpeg" class="desc-img"></div>
             </div>
             <div class="desc-grid">
-                <div class="desc-img-box"><img src="img/Prumysl Duo 18W/Prumysl Duo 18W-thumb-2.jpg" class="desc-img"></div>
+                <div class="desc-img-box"><img src="img/Prumysl Duo 18W/Prumysl Duo 18W-desc-2.jpeg" class="desc-img"></div>
                 <div class="desc-text"><h3>تركيب منفصل</h3><p>تأتي مع كابل تمديد لوضع اللوح في الشمس والكاميرا في الظل.</p></div>
             </div>
         `,
