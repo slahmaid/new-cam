@@ -61,7 +61,7 @@ const PRODUCTS_DB = {
     3: { 
         title: "Prumysl Euro-Shield", 
         price: "699 DH", 
-        oldPrice: "1100 DH", 
+        oldPrice: "850 DH", 
         desc: "نسخة أوروبية متطورة، لوحين للطاقة وبطارية مدمجة. تصميم أنيق للفلل.", 
         fullDesc: `
              <div class="desc-grid">
@@ -84,7 +84,7 @@ const PRODUCTS_DB = {
     4: { 
         title: "Prumysl Duo 18W", 
         price: "899 DH", 
-        oldPrice: "850 DH", 
+        oldPrice: "1100 DH", 
         desc: "كاميرا ثنائية العدسة منخفضة الاستهلاك، 15 ميغابكسيل، لوحين 18W، متوفرة بنسخة WiFi أو 4G.", 
         fullDesc: `
             <div class="desc-grid">
