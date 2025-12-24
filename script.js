@@ -1,172 +1,442 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prumysl Store - Loading...</title>
-    <meta name="description" content="أقوى كاميرات المراقبة الشمسية في المغرب.">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* =========================================
+   PRUMYSL STORE - MAIN JAVASCRIPT
+   Restored Form Logic
+   ========================================= */
 
-    <div id="preloader" class="preloader">
-        <div class="spinner"></div>
-        <div class="loader-logo">Prumysl</div>
-    </div>
-
-    <div class="scroll-progress" id="scrollProgress"></div>
-
-    <header class="floating-header full-width">
-        <a href="index.html" class="back-btn">→ العودة للمتجر</a>
-        <div class="logo">Prumysl</div>
-        <div style="width: 80px;"></div>
-    </header>
-
-    <div class="breadcrumbs">الرئيسية / كاميرات المراقبة / <span id="bread-title">...</span></div>
-
-    <div class="product-container">
-        
-        <div class="product-gallery">
-            <div class="main-img-wrap" id="zoom-container">
-                <img id="main-img" src="" alt="Product Image" class="main-img" onerror="this.src='https://placehold.co/600x600/f8f9fa/e6b800?text=Prumysl+Secure'">
-            </div>
-            <div class="thumbnails" id="thumbs-container"></div>
-        </div>
-
-        <div class="product-info">
-            <span class="product-category">INDUSTRIAL GRADE SECURITY</span>
-            <h1 id="p-title" class="product-title-page">...</h1>
-            <div class="social-proof-banner">
-                <span class="live-dot"></span>
-                <span id="view-counter">12</span> شخص يشاهدون هذا المنتج الآن
-            </div>
-
-            <div id="offers-container" class="offers-container"></div>
-            
-            <div class="price-box">
-                <span id="p-price" class="current-price">...</span>
-                <span id="p-old-price" class="old-price">...</span>
-                <span class="discount-tag">تخفيض محدود</span>
-            </div>
-
-            <p id="p-desc" style="color:var(--text-muted); font-size:1.1rem; margin-bottom:25px; line-height:1.7;">Loading details...</p>
-
-            <div class="timer-box">
-                <span>🔥 ينتهي العرض خلال:</span>
-                <span id="countdown" class="countdown-digits">03:59:00</span>
-            </div>
-
-            <div class="order-card">
-                <input type="hidden" id="selected-variant" value="Standard">
-                <div class="order-header">
-                    <h4>أدخل معلوماتك للطلب</h4>
-                    <p style="font-size:0.85rem; color:var(--text-muted);">املأ الاستمارة واضغط تأكيد الطلب</p>
+// --- 1. PRODUCT DATABASE ---
+const PRODUCTS_DB = {
+    1: { 
+        title: "Prumysl Omni-Guard 360°", 
+        price: "1200 DH", 
+        oldPrice: "1500 DH", 
+        desc: "كاميرا شمسية 4G ثلاثية العدسات PTZ، بدقة 15 ميغابكسيل، 3 شاشات حية ومراقبة 360°.", 
+        fullDesc: `
+            <div class="desc-grid">
+                <div class="desc-text">
+                    <h3>3 عدسات = 3 شاشات حية</h3>
+                    <p>لماذا تشتري 3 كاميرات بينما يمكنك امتلاك Omni-Guard؟</p>
+                    <p>هذه الكاميرا تأتي بعدستين ثابتتين لمراقبة الزوايا المهمة وعدسة ثالثة متحركة (PTZ) تتبع الحركة 360 درجة.</p>
+                    <div class="highlight-box"><strong style="color:var(--primary)">🎯 النتيجة:</strong> لا توجد نقاط عمياء نهائياً.</div>
                 </div>
-
-                <form onsubmit="orderViaWhatsAppWithForm(event)">
-                    <div class="form-group">
-                        <label>الاسم الكامل</label>
-                        <input type="text" id="c-name" class="form-input" placeholder="مثال: أحمد العلوي" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>المدينة</label>
-                        <input type="text" id="c-city" class="form-input" placeholder="مثال: الدار البيضاء" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>رقم الهاتف</label>
-                        <input type="tel" id="c-phone" class="form-input" placeholder="مثال: 0612345678" required>
-                    </div>
-
-                    <div class="benefits-list" style="margin:20px 0;">
-                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; color:var(--text-main); font-weight:700; font-size:0.9rem;">
-                            <span style="color:var(--success);">✔</span> توصيل مجاني
-                        </div>
-                        <div style="display:flex; align-items:center; gap:10px; color:var(--text-main); font-weight:700; font-size:0.9rem;">
-                            <span style="color:var(--success);">✔</span> الدفع عند الاستلام
-                        </div>
-                    </div>
-
-                    <button type="submit" class="whatsapp-order-btn">
-                        <svg viewBox="0 0 32 32" class="wa-order-icon"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.475.642 4.85 1.863 6.963L2.3 29.7l6.9-1.808A13.926 13.926 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"/></svg>
-                        <span>تأكيد الطلب عبر الواتساب</span>
-                    </button>
-                </form>
-
-                <div class="wa-link">
-                    فريقنا جاهز للإجابة على استفساراتكم فوراً
+                <div class="desc-img-box"><img src="img/Prumysl Omni-Guard 360°/Prumysl Omni-Guard 360°-desc-1.jpeg" alt="3 Screen App View" class="desc-img"></div>
+            </div>
+            <div class="desc-grid">
+                <div class="desc-img-box"><img src="img/Prumysl Omni-Guard 360°/Prumysl Omni-Guard 360°-desc-2.jpeg" alt="AI Human Tracking" class="desc-img"></div>
+                <div class="desc-text">
+                    <h3>ذكاء اصطناعي يتتبع المتسللين</h3>
+                    <p>بمجرد دخول شخص غريب، تقوم الكاميرا بالدوران تلقائياً لتتبعه وترسل لك تنبيهاً فورياً.</p>
                 </div>
             </div>
-
-        </div>
-    </div>
-
-    <div style="max-width:1200px; margin:0 auto 60px; padding:0 20px;">
-        <div class="tabs-header">
-            <button class="tab-btn active" onclick="openTab(event, 'desc-tab')">الوصف الكامل</button>
-            <button class="tab-btn" onclick="openTab(event, 'specs-tab')">المواصفات التقنية</button>
-        </div>
-        
-        <div id="desc-tab" class="tab-content active">
-            <div id="full-desc-text"></div>
-        </div>
-        
-        <div id="specs-tab" class="tab-content">
-            <table class="specs-table">
-                <tbody id="specs-body"></tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="related-section">
-        <h3 class="section-title" style="font-size:1.8rem; margin-bottom:40px;">منتجات قد تعجبك</h3>
-        <div class="related-grid" id="related-grid"></div>
-    </div>
-
-    <div class="mobile-sticky-bar">
-        <div class="m-price" id="m-price">...</div>
-        <button onclick="document.querySelector('.order-card').scrollIntoView({behavior: 'smooth'})" class="m-btn">اطلب الآن</button>
-    </div>
-
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-col">
-                <h3>PRUMYSL</h3>
-                <p>حلول الطاقة الشمسية والأمن الذكي.<br>مصممة للمصانع، الضيعات، والمنازل.</p>
+        `,
+        images: [
+            "img/Prumysl Omni-Guard 360°.jpg", 
+            "img/Prumysl Omni-Guard 360°/Prumysl Omni-Guard 360°-main.jpg",
+            "img/Prumysl Omni-Guard 360°/Prumysl Omni-Guard 360°-thumb-2.jpg"
+        ], 
+        specs: { "الدقة": "15 MP (3x5MP)", "البطارية": "8000 mAh Industrial", "الاتصال": "4G / LTE", "اللوح الشمسي": "16W High Efficiency", "الرؤية الليلية": "Color + IR (30m)" } 
+    },
+    2: { 
+        title: "Prumysl Vision 6K Pro", 
+        price: "1100 DH", 
+        oldPrice: "1350 DH", 
+        desc: "كاميرا شمسية ثلاثية العدسات 4G، دقة 6K وزووم رقمي 10X. رؤية فائقة الوضوح.", 
+        fullDesc: `
+            <div class="desc-grid">
+                <div class="desc-text"><h3>دقة 6K: التفاصيل تصنع الفرق</h3><p>كاميرا Vision 6K Pro تعطيك صورة كريستالية تمكنك من قراءة لوحات السيارات.</p></div>
+                <div class="desc-img-box"><img src="img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-desc-1.jpeg" class="desc-img"></div>
             </div>
-            <div class="footer-col">
-                <h3>روابط سريعة</h3>
-                <ul>
-                    <li><a href="index.html">الرئيسية</a></li>
-                    <li><a href="index.html#products">المنتجات</a></li>
-                    <li><a href="about.html">من نحن</a></li>
-                    <li><a href="contact.html">اتصل بنا</a></li>
-                </ul>
+            <div class="desc-grid">
+                <div class="desc-img-box"><img src="img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-desc-2.jpg" class="desc-img"></div>
+                <div class="desc-text"><h3>زووم هجين 10X</h3><p>قرب الصورة 10 مرات دون أن تفقد المشهد العام.</p><div class="highlight-box"><strong style="color:var(--primary)">🛡️ ردع فوري:</strong> صافرات إنذار وأضواء كاشفة.</div></div>
             </div>
-            <div class="footer-col">
-                <h3>تواصل معنا</h3>
-                <ul>
-                    <li>الهاتف: 0600000000</li>
-                    <li>البريد: info@prumysl.store</li>
-                    <li>العنوان: الدار البيضاء، المغرب</li>
-                </ul>
+        `,
+        images: [
+            "img/Prumysl Vision 6K Pro.jpg", 
+            "img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-thumb-1.jpg", 
+            "img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-thumb-2.jpg",
+            "img/Prumysl Vision 6K Pro/Prumysl Vision 6K Pro-main.jpg"
+        ], 
+        specs: { "الدقة": "6K Ultra HD", "الزووم": "10X Hybrid Zoom", "البطارية": "8000 mAh", "العدسات": "Triple Lens System", "التخزين": "SD Card / Cloud" } 
+    },
+    3: { 
+        title: "Prumysl Euro-Shield", 
+        price: "899 DH", 
+        oldPrice: "1100 DH", 
+        desc: "نسخة أوروبية متطورة، لوحين للطاقة وبطارية مدمجة. تصميم أنيق للفلل.", 
+        fullDesc: `
+             <div class="desc-grid">
+                <div class="desc-text"><h3>أناقة التصميم الأوروبي</h3><p>تصميم مدمج (All-in-One) حيث البطاريات والألواح الشمسية مدمجة بشكل انسيابي.</p></div>
+                <div class="desc-img-box"><img src="img/Prumysl Euro-Shield/Prumysl Euro-Shield-desc-1.jpeg" class="desc-img"></div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; <span id="year"></span> Prumysl. جميع الحقوق محفوظة.</p>
-        </div>
-    </footer>
+            <div class="desc-grid">
+                <div class="desc-img-box"><img src="img/Prumysl Euro-Shield/Prumysl Euro-Shield-desc-2.jpeg" class="desc-img"></div>
+                <div class="desc-text"><h3>تقنية اللوح المزدوج</h3><p>لوحين شمسيين لشحن أسرع بـ 50%.</p><div class="highlight-box"><strong style="color:var(--primary)">⚡ شتاء آمن:</strong> تعمل بكفاءة في الأيام الغائمة.</div></div>
+            </div>
+        `,
+        images: [
+            "img/Prumysl Euro-Shield.jpg", 
+            "img/Prumysl Euro-Shield/Prumysl Euro-Shield-main.jpg", 
+            "img/Prumysl Euro-Shield/Prumysl Euro-Shield-thumb-1.jpg", 
+            "img/Prumysl Euro-Shield/Prumysl Euro-Shield-thumb-2.jpg"
+        ], 
+        specs: { "التصميم": "Compact Euro Design", "الطاقة": "Dual Panel Tech", "البطارية": "Built-in Long Life", "الاتصال": "4G / LTE", "مقاومة الماء": "IP66" } 
+    },
+    4: { 
+        title: "Prumysl Duo 18W", 
+        price: "699 DH", 
+        oldPrice: "850 DH", 
+        desc: "كاميرا ثنائية العدسة منخفضة الاستهلاك، 15 ميغابكسيل، لوحين 18W، متوفرة بنسخة WiFi أو 4G.", 
+        fullDesc: `
+            <div class="desc-grid">
+                <div class="desc-text"><h3>طاقة جبارة: ألواح 18W</h3><p>تأتي Duo بلوح ضخم بقوة 18 واط، مما يجعلها الخيار الأفضل للمناطق قليلة الشمس.</p></div>
+                <div class="desc-img-box"><img src="img/Prumysl Duo 18W/Prumysl Duo 18W-desc-1.jpg" class="desc-img"></div>
+            </div>
+            <div class="desc-grid">
+                <div class="desc-img-box"><img src="img/Prumysl Duo 18W/Prumysl Duo 18W-desc-2.jpeg" class="desc-img"></div>
+                <div class="desc-text"><h3>تركيب منفصل</h3><p>تأتي مع كابل تمديد لوضع اللوح في الشمس والكاميرا في الظل.</p></div>
+            </div>
+        `,
+        images: [
+            "img/Prumysl Duo 18W.jpg", 
+            "img/Prumysl Duo 18W/Prumysl Duo 18W-thumb-1.jpg", 
+            "img/Prumysl Duo 18W/Prumysl Duo 18W-thumb-2.jpg",
+            "img/Prumysl Duo 18W/Prumysl Duo 18W-main.jpg"
+        ], 
+        specs: { "الطاقة": "18W Split Panel", "النوع": "Dual Lens PTZ", "الدقة": "15 MP", "البطارية": "8000 mAh", "المستشعر": "PIR Motion" } 
+    },
+    5: { 
+        title: "Prumysl Falcon 36X", 
+        price: "2800 DH", 
+        oldPrice: "3400 DH", 
+        desc: "الوحش الصناعي: 24 ميغابكسل، زووم بصري 36X وبطارية 12000mAh.", 
+        fullDesc: `
+            <div class="desc-grid">
+                <div class="desc-text"><h3>زووم بصري 36X (حقيقي)</h3><p>زووم بصري بعدسات متحركة (Optical Zoom) مثل الكاميرات الاحترافية.</p><div class="highlight-box"><strong style="color:var(--primary)">🔭 المدى:</strong> تغطية تصل إلى 1 كيلومتر.</div></div>
+                <div class="desc-img-box"><img src="img/Prumysl Falcon 36X/Prumysl Falcon 36X-desc-1.jpeg" class="desc-img"></div>
+            </div>
+            <div class="desc-grid">
+                <div class="desc-img-box"><img src="img/Prumysl Falcon 36X/Prumysl Falcon 36X-desc-2.jpeg" class="desc-img"></div>
+                <div class="desc-text"><h3>دبابة مدرعة (Full Metal)</h3><p>جسم معدني كامل مصمم لتحمل حرارة الصحراء والصدمات.</p></div>
+            </div>
+        `,
+        images: [
+            "img/Prumysl Falcon 36X.jpg", 
+            "img/Prumysl Falcon 36X/Prumysl Falcon 36X-main.jpg", 
+            "img/Prumysl Falcon 36X/Prumysl Falcon 36X-Thumb-1.jpeg", 
+            "img/Prumysl Falcon 36X/Prumysl Falcon 36X-thumb-2.jpg"
+        ], 
+        specs: { "الزووم": "36X Optical", "البطارية": "12000 mAh", "الهيكل": "Full Metal Alloy", "الدقة": "24 MP", "المدى": "Up to 1KM" } 
+    }
+};
 
-    <script src="script.js"></script>
-    <script>
-        function openTab(evt, tabName) {
-            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            evt.currentTarget.classList.add('active');
+// --- 2. PRELOADER LOGIC ---
+(function() {
+    const fadeOutPreloader = () => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            preloader.classList.add('fade-out');
+            setTimeout(() => { preloader.style.display = 'none'; }, 600);
         }
-    </script>
-</body>
-</html>
+    };
+    window.addEventListener('load', () => { setTimeout(fadeOutPreloader, 500); });
+    setTimeout(fadeOutPreloader, 5000); // Failsafe
+})();
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 3. GLOBAL INIT ---
+    initScrollProgress();
+    initMobileMenu();
+    updateCopyrightYear();
+
+    // --- 4. PAGE SPECIFIC INIT ---
+    if (document.querySelector('.hero')) {
+        initScrollReveal();
+        initHolographicCards();
+        initFaqToggle();
+    }
+
+    if (document.querySelector('.product-container')) {
+        document.body.classList.add('product-page-body');
+        initProductPage();
+    }
+
+    if (document.querySelector('.contact-form-box')) {
+        initContactPage();
+    }
+});
+
+/* =========================================
+   FUNCTIONS
+   ========================================= */
+
+function initProductPage() {
+    const params = new URLSearchParams(window.location.search);
+    let pid = params.get('id') || 1; // Default to 1
+    let p = PRODUCTS_DB[pid];
+
+    if(!p) {
+        console.error("Product not found in DB");
+        return;
+    }
+
+    // Safely set text content
+    const setSafe = (id, text) => {
+        const el = document.getElementById(id);
+        if(el) el.innerText = text;
+    };
+    const setHtml = (id, html) => {
+        const el = document.getElementById(id);
+        if(el) el.innerHTML = html;
+    };
+
+    setSafe('p-title', p.title);
+    setSafe('bread-title', p.title);
+    setSafe('p-desc', p.desc);
+    setHtml('full-desc-text', p.fullDesc);
+    setSafe('view-counter', Math.floor(Math.random() * (25 - 8 + 1) + 8));
+
+    // WhatsApp Help Links
+    const waHelpLink = `https://wa.me/212600000000?text=${encodeURIComponent("السلام عليكم، عندي استفسار بخصوص: " + p.title)}`;
+    const helpBtn = document.getElementById('wa-help-btn');
+    if(helpBtn) helpBtn.href = waHelpLink;
+    
+    const mobHelpBtn = document.getElementById('wa-btn-mobile');
+    if(mobHelpBtn) mobHelpBtn.href = waHelpLink;
+
+    // Handle Display (Price & Image)
+    const offersDiv = document.getElementById('offers-container');
+    const variantInput = document.getElementById('selected-variant');
+    
+    if(p.offers && offersDiv) {
+        offersDiv.style.display = 'grid';
+        p.offers.forEach((offer, i) => {
+            offersDiv.innerHTML += `
+                <div class="offer-option ${i===0?'selected':''}" onclick="selectOffer(this, '${offer.price}', '${offer.oldPrice}', '${offer.img}', '${offer.title}')">
+                    <span style="font-size:0.9rem">${offer.title}</span>
+                    <span class="offer-price-tag">${offer.price}</span>
+                </div>`;
+            if(i===0) {
+                updateDisplay(offer.price, offer.oldPrice, offer.img);
+                if(variantInput) variantInput.value = offer.title;
+            }
+        });
+    } else {
+        // Standard Product
+        updateDisplay(p.price, p.oldPrice, p.images[0]);
+        if(variantInput) variantInput.value = "Standard";
+    }
+
+    // Specs
+    const specsBody = document.getElementById('specs-body');
+    if(specsBody) {
+        for(const [k,v] of Object.entries(p.specs)) {
+            specsBody.innerHTML += `<tr><th>${k}</th><td>${v}</td></tr>`;
+        }
+    }
+
+    // Related Products
+    const relatedGrid = document.getElementById('related-grid');
+    if(relatedGrid) {
+        let c = 0;
+        for(const [k, rp] of Object.entries(PRODUCTS_DB)) {
+            if(k != pid && c < 4) {
+                let img = rp.offers ? rp.offers[0].img : rp.images[0];
+                relatedGrid.innerHTML += `
+                    <div class="r-card">
+                        <a href="product.html?id=${k}">
+                            <div class="r-img-wrap"><img src="${img}" alt="${rp.title}" loading="lazy"></div>
+                            <div class="r-info">
+                                <div class="r-title">${rp.title}</div>
+                                <div class="r-price">${rp.price}</div>
+                            </div>
+                        </a>
+                    </div>`;
+                c++;
+            }
+        }
+    }
+
+    // Thumbnails
+    const thumbsContainer = document.getElementById('thumbs-container');
+    if(thumbsContainer && p.images && p.images.length > 0 && !p.offers) {
+        p.images.forEach((img, idx) => {
+            thumbsContainer.innerHTML += 
+                `<img src="${img}" class="thumb ${idx===0?'active':''}" onclick="changeImg(this, '${img}')">`;
+        });
+    }
+
+    initZoomEffect();
+    initCountdown();
+}
+
+// Exposed Window Functions
+window.updateDisplay = function(price, old, img) {
+    const pPrice = document.getElementById('p-price');
+    const mPrice = document.getElementById('m-price');
+    const pOld = document.getElementById('p-old-price');
+    const mainImg = document.getElementById('main-img');
+
+    if(pPrice) pPrice.innerText = price;
+    if(mPrice) mPrice.innerText = price;
+    if(pOld) pOld.innerText = old;
+    if(mainImg) mainImg.src = img;
+};
+
+window.selectOffer = function(el, price, old, img, title) {
+    document.querySelectorAll('.offer-option').forEach(d => d.classList.remove('selected'));
+    el.classList.add('selected');
+    updateDisplay(price, old, img);
+    const vInput = document.getElementById('selected-variant');
+    if(vInput) vInput.value = title;
+};
+
+window.changeImg = function(el, src) {
+    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    const mainImg = document.getElementById('main-img');
+    if(mainImg) {
+        mainImg.style.opacity = 0;
+        setTimeout(() => {
+            mainImg.src = src;
+            mainImg.style.opacity = 1;
+        }, 200);
+    }
+};
+
+/* --- NEW: WHATSAPP WITH FORM DATA --- */
+window.orderViaWhatsAppWithForm = function(e) {
+    e.preventDefault();
+
+    const titleEl = document.getElementById('p-title');
+    const priceEl = document.getElementById('p-price');
+    const variantEl = document.getElementById('selected-variant');
+
+    // Get Form Data
+    const name = document.getElementById('c-name').value;
+    const city = document.getElementById('c-city').value;
+    const phone = document.getElementById('c-phone').value;
+
+    const product = titleEl ? titleEl.innerText : "Product";
+    const price = priceEl ? priceEl.innerText : "Price";
+    const variant = variantEl ? variantEl.value : 'Standard';
+    
+    // Construct Professional Message
+    const msg = `*طلب جديد (Prumysl Store)* 📦\n\n` + 
+                `👤 *معلومات الزبون:*\n` +
+                `- الاسم: ${name}\n` +
+                `- المدينة: ${city}\n` +
+                `- الهاتف: ${phone}\n\n` +
+                `🛍️ *تفاصيل المنتج:*\n` +
+                `- المنتج: ${product}\n` +
+                `- النوع: ${variant}\n` +
+                `- الثمن: ${price}\n\n` +
+                `📍 المرجو تأكيد الطلب.`;
+    
+    window.open(`https://wa.me/212600000000?text=${encodeURIComponent(msg)}`, '_blank');
+};
+
+// Utilities
+function initScrollProgress() {
+    const bar = document.getElementById("scrollProgress");
+    if(!bar) return;
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        bar.style.width = scrolled + "%";
+    });
+}
+
+function initMobileMenu() {
+    window.toggleMenu = function() {
+        const menu = document.getElementById('mobileMenu');
+        if(menu) menu.classList.toggle('active');
+    };
+}
+
+function updateCopyrightYear() {
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+}
+
+function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { 
+            if (entry.isIntersecting) entry.target.classList.add('active'); 
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+function initHolographicCards() {
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        });
+    });
+}
+
+function initFaqToggle() {
+    window.toggleFaqNew = function(button) {
+        const item = button.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(i => { 
+            i.classList.remove('active'); 
+            i.querySelector('.faq-answer').style.maxHeight = null; 
+        });
+        if (!isActive) { 
+            item.classList.add('active'); 
+            answer.style.maxHeight = answer.scrollHeight + "px"; 
+        }
+    };
+}
+
+function initContactPage() {
+    window.sendWhatsAppContact = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const topic = document.getElementById('topic').value;
+        const msgText = document.getElementById('msg').value;
+        const fullMsg = `*استفسار جديد:*\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📌 الموضوع: ${topic}\n📝 الرسالة: ${msgText}`;
+        window.open(`https://wa.me/212600000000?text=${encodeURIComponent(fullMsg)}`, '_blank');
+    };
+}
+
+function initZoomEffect() {
+    const container = document.getElementById('zoom-container');
+    const img = document.getElementById('main-img');
+    if(!container || !img) return;
+
+    container.addEventListener('mousemove', function(e) {
+        if(window.innerWidth < 900) return;
+        const { left, top, width, height } = container.getBoundingClientRect();
+        const x = (e.clientX - left) / width * 100;
+        const y = (e.clientY - top) / height * 100;
+        img.style.transformOrigin = `${x}% ${y}%`;
+        img.style.transform = 'scale(2)'; 
+    });
+
+    container.addEventListener('mouseleave', function() {
+        img.style.transform = 'scale(1)';
+        img.style.transformOrigin = 'center center';
+    });
+}
+
+function initCountdown() {
+    const el = document.getElementById('countdown');
+    if(!el) return;
+    let time = 4 * 60 * 60; 
+    setInterval(() => {
+        let h = Math.floor(time / 3600);
+        let m = Math.floor((time % 3600) / 60);
+        let s = Math.floor(time % 60);
+        el.innerText = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        time--;
+        if(time < 0) time = 4 * 60 * 60; 
+    }, 1000);
+}
