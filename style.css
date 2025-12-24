@@ -416,6 +416,25 @@ ul { list-style: none; }
 .order-header { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-light); }
 .order-header h4 { color: var(--text-main); margin-bottom: 5px; font-size: 1.2rem; }
 
+/* === NEW: FORM INPUT STYLES === */
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; font-weight: 700; margin-bottom: 6px; font-size: 0.95rem; color: var(--text-main); }
+.form-input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: #fcfcfc;
+    transition: 0.3s;
+}
+.form-input:focus {
+    border-color: var(--primary);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(230, 184, 0, 0.1);
+}
+
 /* === UPDATED WHATSAPP BUTTON STYLE === */
 .whatsapp-order-btn {
     width: 100%;
