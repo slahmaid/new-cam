@@ -197,7 +197,7 @@ function initProductPage() {
     setSafe('view-counter', Math.floor(Math.random() * (25 - 8 + 1) + 8));
 
     // WhatsApp Help Links
-    const waHelpLink = `https://wa.me/212600000000?text=${encodeURIComponent("السلام عليكم، عندي استفسار بخصوص: " + p.title)}`;
+    const waHelpLink = `https://wa.me/212723496854?text=${encodeURIComponent("السلام عليكم، عندي استفسار بخصوص: " + p.title)}`;
     const helpBtn = document.getElementById('wa-help-btn');
     if(helpBtn) helpBtn.href = waHelpLink;
     
@@ -333,7 +333,7 @@ window.orderViaWhatsAppWithForm = function(e) {
                 `- الثمن: ${price}\n\n` +
                 `📍 المرجو تأكيد الطلب.`;
     
-    window.open(`https://wa.me/212600000000?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/212723496854?text=${encodeURIComponent(msg)}`, '_blank');
 };
 
 // Utilities
@@ -403,7 +403,7 @@ function initContactPage() {
         const topic = document.getElementById('topic').value;
         const msgText = document.getElementById('msg').value;
         const fullMsg = `*استفسار جديد:*\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📌 الموضوع: ${topic}\n📝 الرسالة: ${msgText}`;
-        window.open(`https://wa.me/212600000000?text=${encodeURIComponent(fullMsg)}`, '_blank');
+        window.open(`https://wa.me/212723496854?text=${encodeURIComponent(fullMsg)}`, '_blank');
     };
 }
 
