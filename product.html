@@ -29,14 +29,14 @@
         
         <div class="product-gallery">
             <div class="main-img-wrap" id="zoom-container">
-                <img id="main-img" src="" alt="Product Image" class="main-img">
+                <img id="main-img" src="" alt="Product Image" class="main-img" onerror="this.src='https://placehold.co/600x600/f8f9fa/e6b800?text=Prumysl+Secure'">
             </div>
             <div class="thumbnails" id="thumbs-container"></div>
         </div>
 
         <div class="product-info">
             <span class="product-category">INDUSTRIAL GRADE SECURITY</span>
-            <h1 id="p-title" class="product-title-page">Loading...</h1>
+            <h1 id="p-title" class="product-title-page">...</h1>
             <div class="social-proof-banner">
                 <span class="live-dot"></span>
                 <span id="view-counter">12</span> شخص يشاهدون هذا المنتج الآن
@@ -60,29 +60,43 @@
             <div class="order-card">
                 <input type="hidden" id="selected-variant" value="Standard">
                 <div class="order-header">
-                    <h4>أطلب الآن عبر الواتساب</h4>
-                    <p style="font-size:0.85rem; color:var(--text-muted);">اضغط الزر أسفله للتحدث مع فريق المبيعات</p>
-                </div>
-                
-                <div class="benefits-list" style="margin-bottom:20px;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; color:var(--text-main); font-weight:700; font-size:0.9rem;">
-                        <span style="color:var(--success);">✔</span> توصيل مجاني لجميع المدن
-                    </div>
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; color:var(--text-main); font-weight:700; font-size:0.9rem;">
-                        <span style="color:var(--success);">✔</span> الدفع عند الاستلام (بعد المعاينة)
-                    </div>
-                    <div style="display:flex; align-items:center; gap:10px; color:var(--text-main); font-weight:700; font-size:0.9rem;">
-                        <span style="color:var(--success);">✔</span> ضمان حقيقي لمدة سنة
-                    </div>
+                    <h4>أدخل معلوماتك للطلب</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted);">املأ الاستمارة واضغط تأكيد الطلب</p>
                 </div>
 
-                <button onclick="orderViaWhatsApp()" class="whatsapp-order-btn">
-                    <svg viewBox="0 0 32 32" class="wa-order-icon"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.475.642 4.85 1.863 6.963L2.3 29.7l6.9-1.808A13.926 13.926 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"/></svg>
-                    <span>تأكيد الطلب عبر الواتساب</span>
-                </button>
+                <form onsubmit="orderViaWhatsAppWithForm(event)">
+                    <div class="form-group">
+                        <label>الاسم الكامل</label>
+                        <input type="text" id="c-name" class="form-input" placeholder="مثال: أحمد العلوي" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>المدينة</label>
+                        <input type="text" id="c-city" class="form-input" placeholder="مثال: الدار البيضاء" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>رقم الهاتف</label>
+                        <input type="tel" id="c-phone" class="form-input" placeholder="مثال: 0612345678" required>
+                    </div>
+
+                    <div class="benefits-list" style="margin:20px 0;">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; color:var(--text-main); font-weight:700; font-size:0.9rem;">
+                            <span style="color:var(--success);">✔</span> توصيل مجاني
+                        </div>
+                        <div style="display:flex; align-items:center; gap:10px; color:var(--text-main); font-weight:700; font-size:0.9rem;">
+                            <span style="color:var(--success);">✔</span> الدفع عند الاستلام
+                        </div>
+                    </div>
+
+                    <button type="submit" class="whatsapp-order-btn">
+                        <svg viewBox="0 0 32 32" class="wa-order-icon"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.475.642 4.85 1.863 6.963L2.3 29.7l6.9-1.808A13.926 13.926 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"/></svg>
+                        <span>تأكيد الطلب عبر الواتساب</span>
+                    </button>
+                </form>
 
                 <div class="wa-link">
-                    هل تحتاج مساعدة؟ <a href="#" id="wa-help-btn" target="_blank">تحدث معنا</a>
+                    فريقنا جاهز للإجابة على استفساراتكم فوراً
                 </div>
             </div>
 
@@ -113,10 +127,7 @@
 
     <div class="mobile-sticky-bar">
         <div class="m-price" id="m-price">...</div>
-        <a href="#" id="wa-btn-mobile" class="m-wa-btn" target="_blank">
-            <svg viewBox="0 0 32 32" style="width:24px;height:24px;fill:#25D366;"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.475.642 4.85 1.863 6.963L2.3 29.7l6.9-1.808A13.926 13.926 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"/></svg>
-        </a>
-        <button onclick="orderViaWhatsApp()" class="m-btn">اطلب عبر الواتساب</button>
+        <button onclick="document.querySelector('.order-card').scrollIntoView({behavior: 'smooth'})" class="m-btn">اطلب الآن</button>
     </div>
 
     <footer class="site-footer">
