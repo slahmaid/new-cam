@@ -58,30 +58,34 @@
             </div>
 
             <div class="order-card">
+                <input type="hidden" id="selected-variant" value="Standard">
                 <div class="order-header">
-                    <h4>أطلب الآن والدفع عند الاستلام</h4>
-                    <p style="font-size:0.85rem; color:var(--text-muted);">التوصيل مجاني لجميع المدن المغربية 🇲🇦</p>
+                    <h4>أطلب الآن عبر الواتساب</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted);">اضغط الزر أسفله للتحدث مع فريق المبيعات</p>
                 </div>
-                <form onsubmit="sendToWhatsApp(event)">
-                    <input type="hidden" id="selected-variant" value="Standard">
-                    <label class="form-label">الاسم الكامل</label>
-                    <input type="text" id="order-name" class="form-input" placeholder="الاسم" required>
-                    
-                    <label class="form-label">المدينة</label>
-                    <input type="text" id="order-city" class="form-input" placeholder="المدينة" required>
-                    
-                    <label class="form-label">رقم الهاتف</label>
-                    <input type="tel" id="order-phone" class="form-input" placeholder="رقم الهاتف (06...)" required>
-                    
-                    <button type="submit" class="submit-btn">
-                        <span>أكد الطلب الآن</span>
-                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </button>
-                </form>
+                
+                <div class="benefits-list" style="margin-bottom:20px;">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; color:var(--text-main); font-weight:700; font-size:0.9rem;">
+                        <span style="color:var(--success);">✔</span> توصيل مجاني لجميع المدن
+                    </div>
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; color:var(--text-main); font-weight:700; font-size:0.9rem;">
+                        <span style="color:var(--success);">✔</span> الدفع عند الاستلام (بعد المعاينة)
+                    </div>
+                    <div style="display:flex; align-items:center; gap:10px; color:var(--text-main); font-weight:700; font-size:0.9rem;">
+                        <span style="color:var(--success);">✔</span> ضمان حقيقي لمدة سنة
+                    </div>
+                </div>
+
+                <button onclick="orderViaWhatsApp()" class="whatsapp-order-btn">
+                    <svg viewBox="0 0 32 32" class="wa-order-icon"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.475.642 4.85 1.863 6.963L2.3 29.7l6.9-1.808A13.926 13.926 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"/></svg>
+                    <span>تأكيد الطلب عبر الواتساب</span>
+                </button>
+
                 <div class="wa-link">
-                    هل تحتاج مساعدة؟ <a href="#" id="wa-help-btn" target="_blank">تحدث معنا عبر الواتساب</a>
+                    فريقنا جاهز للإجابة على استفساراتكم فوراً
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -112,7 +116,7 @@
         <a href="#" id="wa-btn-mobile" class="m-wa-btn" target="_blank">
             <svg viewBox="0 0 32 32" style="width:24px;height:24px;fill:#25D366;"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.475.642 4.85 1.863 6.963L2.3 29.7l6.9-1.808A13.926 13.926 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"/></svg>
         </a>
-        <button onclick="document.querySelector('.order-card').scrollIntoView({behavior:'smooth'})" class="m-btn">اطلب الآن</button>
+        <button onclick="orderViaWhatsApp()" class="m-btn">اطلب عبر الواتساب</button>
     </div>
 
     <footer class="site-footer">
