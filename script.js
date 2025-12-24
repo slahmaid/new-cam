@@ -1,127 +1,9 @@
 /* =========================================
    PRUMYSL STORE - MAIN JAVASCRIPT
-   Handles Global Logic, Product Data, and Page Specifics
+   Fixed & Optimized Version
    ========================================= */
 
-// --- 1. PRELOADER LOGIC (Runs immediately) ---
-(function() {
-    const fadeOutPreloader = () => {
-        const preloader = document.getElementById('preloader');
-        if (preloader) {
-            preloader.classList.add('fade-out');
-            setTimeout(() => { preloader.style.display = 'none'; }, 600);
-        }
-    };
-
-    window.addEventListener('load', () => {
-        setTimeout(fadeOutPreloader, 500);
-    });
-
-    setTimeout(fadeOutPreloader, 5000);
-})();
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 2. GLOBAL INITIALIZATION ---
-    initScrollProgress();
-    initMobileMenu();
-    updateCopyrightYear();
-
-    // --- 3. PAGE SPECIFIC LOGIC ---
-    
-    if (document.querySelector('.hero')) {
-        initScrollReveal();
-        initHolographicCards();
-        initFaqToggle();
-    }
-
-    if (document.querySelector('.product-container')) {
-        document.body.classList.add('product-page-body');
-        initProductPage();
-    }
-
-    if (document.querySelector('.contact-form-box')) {
-        initContactPage();
-    }
-});
-
-/* =========================================
-   GLOBAL FUNCTIONS
-   ========================================= */
-
-function initScrollProgress() {
-    const bar = document.getElementById("scrollProgress");
-    if(!bar) return;
-    window.addEventListener('scroll', () => {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        bar.style.width = scrolled + "%";
-    });
-}
-
-function initMobileMenu() {
-    window.toggleMenu = function() {
-        const menu = document.getElementById('mobileMenu');
-        if(menu) menu.classList.toggle('active');
-    };
-}
-
-function updateCopyrightYear() {
-    const yearSpan = document.getElementById('year');
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-}
-
-/* =========================================
-   HOME PAGE LOGIC
-   ========================================= */
-
-function initScrollReveal() {
-    const observerOptions = { threshold: 0.15 };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { 
-            if (entry.isIntersecting) entry.target.classList.add('active'); 
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}
-
-function initHolographicCards() {
-    document.querySelectorAll('.product-card').forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
-    });
-}
-
-function initFaqToggle() {
-    window.toggleFaqNew = function(button) {
-        const item = button.parentElement;
-        const answer = item.querySelector('.faq-answer');
-        const isActive = item.classList.contains('active');
-        
-        document.querySelectorAll('.faq-item').forEach(i => { 
-            i.classList.remove('active'); 
-            i.querySelector('.faq-answer').style.maxHeight = null; 
-        });
-
-        if (!isActive) { 
-            item.classList.add('active'); 
-            answer.style.maxHeight = answer.scrollHeight + "px"; 
-        }
-    };
-}
-
-/* =========================================
-   PRODUCT PAGE LOGIC & DATABASE
-   ========================================= */
-
+// --- 1. PRODUCT DATABASE (Moved to top for safety) ---
 const PRODUCTS_DB = {
     1: { 
         title: "Prumysl Omni-Guard 360°", 
@@ -247,29 +129,86 @@ const PRODUCTS_DB = {
     }
 };
 
+// --- 2. PRELOADER LOGIC ---
+(function() {
+    const fadeOutPreloader = () => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            preloader.classList.add('fade-out');
+            setTimeout(() => { preloader.style.display = 'none'; }, 600);
+        }
+    };
+    window.addEventListener('load', () => { setTimeout(fadeOutPreloader, 500); });
+    setTimeout(fadeOutPreloader, 5000); // Failsafe
+})();
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 3. GLOBAL INIT ---
+    initScrollProgress();
+    initMobileMenu();
+    updateCopyrightYear();
+
+    // --- 4. PAGE SPECIFIC INIT ---
+    if (document.querySelector('.hero')) {
+        initScrollReveal();
+        initHolographicCards();
+        initFaqToggle();
+    }
+
+    if (document.querySelector('.product-container')) {
+        document.body.classList.add('product-page-body');
+        initProductPage();
+    }
+
+    if (document.querySelector('.contact-form-box')) {
+        initContactPage();
+    }
+});
+
+/* =========================================
+   FUNCTIONS
+   ========================================= */
+
 function initProductPage() {
     const params = new URLSearchParams(window.location.search);
-    let pid = params.get('id') || 1;
+    let pid = params.get('id') || 1; // Default to 1
     let p = PRODUCTS_DB[pid];
 
-    if(!p) return; 
+    if(!p) {
+        console.error("Product not found in DB");
+        return;
+    }
 
-    // 1. Render Basic Info
-    document.title = p.title + " | Prumysl Store";
-    document.getElementById('p-title').innerText = p.title;
-    document.getElementById('bread-title').innerText = p.title;
-    document.getElementById('p-desc').innerText = p.desc;
-    document.getElementById('full-desc-text').innerHTML = p.fullDesc;
-    document.getElementById('view-counter').innerText = Math.floor(Math.random() * (25 - 8 + 1) + 8);
+    // Safely set text content
+    const setSafe = (id, text) => {
+        const el = document.getElementById(id);
+        if(el) el.innerText = text;
+    };
+    const setHtml = (id, html) => {
+        const el = document.getElementById(id);
+        if(el) el.innerHTML = html;
+    };
 
-    // 2. WhatsApp Help Links
+    setSafe('p-title', p.title);
+    setSafe('bread-title', p.title);
+    setSafe('p-desc', p.desc);
+    setHtml('full-desc-text', p.fullDesc);
+    setSafe('view-counter', Math.floor(Math.random() * (25 - 8 + 1) + 8));
+
+    // WhatsApp Help Links
     const waHelpLink = `https://wa.me/212600000000?text=${encodeURIComponent("السلام عليكم، عندي استفسار بخصوص: " + p.title)}`;
-    document.getElementById('wa-help-btn').href = waHelpLink;
-    document.getElementById('wa-btn-mobile').href = waHelpLink;
+    const helpBtn = document.getElementById('wa-help-btn');
+    if(helpBtn) helpBtn.href = waHelpLink;
+    
+    const mobHelpBtn = document.getElementById('wa-btn-mobile');
+    if(mobHelpBtn) mobHelpBtn.href = waHelpLink;
 
-    // 3. Handle Offers vs Standard
+    // Handle Display (Price & Image)
     const offersDiv = document.getElementById('offers-container');
-    if(p.offers) {
+    const variantInput = document.getElementById('selected-variant');
+    
+    if(p.offers && offersDiv) {
         offersDiv.style.display = 'grid';
         p.offers.forEach((offer, i) => {
             offersDiv.innerHTML += `
@@ -279,88 +218,101 @@ function initProductPage() {
                 </div>`;
             if(i===0) {
                 updateDisplay(offer.price, offer.oldPrice, offer.img);
-                document.getElementById('selected-variant').value = offer.title;
+                if(variantInput) variantInput.value = offer.title;
             }
         });
     } else {
+        // Standard Product
         updateDisplay(p.price, p.oldPrice, p.images[0]);
-        document.getElementById('selected-variant').value = "Standard";
+        if(variantInput) variantInput.value = "Standard";
     }
 
-    // 4. Populate Specs
+    // Specs
     const specsBody = document.getElementById('specs-body');
-    for(const [k,v] of Object.entries(p.specs)) {
-        specsBody.innerHTML += `<tr><th>${k}</th><td>${v}</td></tr>`;
-    }
-
-    // 5. Populate Related
-    const relatedGrid = document.getElementById('related-grid');
-    let c = 0;
-    for(const [k, rp] of Object.entries(PRODUCTS_DB)) {
-        if(k != pid && c < 4) {
-            let img = rp.offers ? rp.offers[0].img : rp.images[0];
-            relatedGrid.innerHTML += `
-                <div class="r-card">
-                    <a href="product.html?id=${k}">
-                        <div class="r-img-wrap"><img src="${img}" alt="${rp.title}" loading="lazy"></div>
-                        <div class="r-info">
-                            <div class="r-title">${rp.title}</div>
-                            <div class="r-price">${rp.price}</div>
-                        </div>
-                    </a>
-                </div>`;
-            c++;
+    if(specsBody) {
+        for(const [k,v] of Object.entries(p.specs)) {
+            specsBody.innerHTML += `<tr><th>${k}</th><td>${v}</td></tr>`;
         }
     }
 
-    // 6. Thumbnails
+    // Related Products
+    const relatedGrid = document.getElementById('related-grid');
+    if(relatedGrid) {
+        let c = 0;
+        for(const [k, rp] of Object.entries(PRODUCTS_DB)) {
+            if(k != pid && c < 4) {
+                let img = rp.offers ? rp.offers[0].img : rp.images[0];
+                relatedGrid.innerHTML += `
+                    <div class="r-card">
+                        <a href="product.html?id=${k}">
+                            <div class="r-img-wrap"><img src="${img}" alt="${rp.title}" loading="lazy"></div>
+                            <div class="r-info">
+                                <div class="r-title">${rp.title}</div>
+                                <div class="r-price">${rp.price}</div>
+                            </div>
+                        </a>
+                    </div>`;
+                c++;
+            }
+        }
+    }
+
+    // Thumbnails
     const thumbsContainer = document.getElementById('thumbs-container');
-    if(p.images && p.images.length > 0 && !p.offers) {
+    if(thumbsContainer && p.images && p.images.length > 0 && !p.offers) {
         p.images.forEach((img, idx) => {
             thumbsContainer.innerHTML += 
                 `<img src="${img}" class="thumb ${idx===0?'active':''}" onclick="changeImg(this, '${img}')">`;
         });
     }
 
-    // 7. Zoom & Timer
     initZoomEffect();
     initCountdown();
 }
 
-// Product Page Helpers exposed to window
+// Exposed Window Functions
 window.updateDisplay = function(price, old, img) {
-    document.getElementById('p-price').innerText = price;
-    document.getElementById('m-price').innerText = price;
-    document.getElementById('p-old-price').innerText = old;
-    document.getElementById('main-img').src = img;
+    const pPrice = document.getElementById('p-price');
+    const mPrice = document.getElementById('m-price');
+    const pOld = document.getElementById('p-old-price');
+    const mainImg = document.getElementById('main-img');
+
+    if(pPrice) pPrice.innerText = price;
+    if(mPrice) mPrice.innerText = price;
+    if(pOld) pOld.innerText = old;
+    if(mainImg) mainImg.src = img;
 };
 
 window.selectOffer = function(el, price, old, img, title) {
     document.querySelectorAll('.offer-option').forEach(d => d.classList.remove('selected'));
     el.classList.add('selected');
     updateDisplay(price, old, img);
-    document.getElementById('selected-variant').value = title;
+    const vInput = document.getElementById('selected-variant');
+    if(vInput) vInput.value = title;
 };
 
 window.changeImg = function(el, src) {
     document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
     const mainImg = document.getElementById('main-img');
-    mainImg.style.opacity = 0;
-    setTimeout(() => {
-        mainImg.src = src;
-        mainImg.style.opacity = 1;
-    }, 200);
+    if(mainImg) {
+        mainImg.style.opacity = 0;
+        setTimeout(() => {
+            mainImg.src = src;
+            mainImg.style.opacity = 1;
+        }, 200);
+    }
 };
 
-/* --- REPLACED: DIRECT WHATSAPP ORDER FUNCTION --- */
 window.orderViaWhatsApp = function() {
-    const product = document.getElementById('p-title').innerText;
-    const price = document.getElementById('p-price').innerText;
-    const variantInput = document.getElementById('selected-variant');
-    const variant = variantInput ? variantInput.value : 'Standard';
+    const titleEl = document.getElementById('p-title');
+    const priceEl = document.getElementById('p-price');
+    const variantEl = document.getElementById('selected-variant');
+
+    const product = titleEl ? titleEl.innerText : "Product";
+    const price = priceEl ? priceEl.innerText : "Price";
+    const variant = variantEl ? variantEl.value : 'Standard';
     
-    // Professional Message Setup
     const msg = `*طلب جديد (Prumysl Store)* 📦\n\n` + 
                 `🛍️ المنتج: *${product}*\n` +
                 `🎨 النوع: *${variant}*\n` +
@@ -370,9 +322,64 @@ window.orderViaWhatsApp = function() {
     window.open(`https://wa.me/212600000000?text=${encodeURIComponent(msg)}`, '_blank');
 };
 
-/* =========================================
-   CONTACT PAGE LOGIC
-   ========================================= */
+// Utilities
+function initScrollProgress() {
+    const bar = document.getElementById("scrollProgress");
+    if(!bar) return;
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        bar.style.width = scrolled + "%";
+    });
+}
+
+function initMobileMenu() {
+    window.toggleMenu = function() {
+        const menu = document.getElementById('mobileMenu');
+        if(menu) menu.classList.toggle('active');
+    };
+}
+
+function updateCopyrightYear() {
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+}
+
+function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { 
+            if (entry.isIntersecting) entry.target.classList.add('active'); 
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+function initHolographicCards() {
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        });
+    });
+}
+
+function initFaqToggle() {
+    window.toggleFaqNew = function(button) {
+        const item = button.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(i => { 
+            i.classList.remove('active'); 
+            i.querySelector('.faq-answer').style.maxHeight = null; 
+        });
+        if (!isActive) { 
+            item.classList.add('active'); 
+            answer.style.maxHeight = answer.scrollHeight + "px"; 
+        }
+    };
+}
 
 function initContactPage() {
     window.sendWhatsAppContact = function(e) {
@@ -381,15 +388,10 @@ function initContactPage() {
         const phone = document.getElementById('phone').value;
         const topic = document.getElementById('topic').value;
         const msgText = document.getElementById('msg').value;
-
         const fullMsg = `*استفسار جديد:*\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n📌 الموضوع: ${topic}\n📝 الرسالة: ${msgText}`;
         window.open(`https://wa.me/212600000000?text=${encodeURIComponent(fullMsg)}`, '_blank');
     };
 }
-
-/* =========================================
-   HELPER UTILITIES
-   ========================================= */
 
 function initZoomEffect() {
     const container = document.getElementById('zoom-container');
@@ -414,15 +416,11 @@ function initZoomEffect() {
 function initCountdown() {
     const el = document.getElementById('countdown');
     if(!el) return;
-    
-    // Set deadline to 4 hours from now
     let time = 4 * 60 * 60; 
-    
-    const timer = setInterval(() => {
+    setInterval(() => {
         let h = Math.floor(time / 3600);
         let m = Math.floor((time % 3600) / 60);
         let s = Math.floor(time % 60);
-        
         el.innerText = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
         time--;
         if(time < 0) time = 4 * 60 * 60; 
