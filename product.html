@@ -61,23 +61,23 @@
                 <input type="hidden" id="selected-variant" value="Standard">
                 <div class="order-header">
                     <h4>أدخل معلوماتك للطلب</h4>
-                    <p style="font-size:0.85rem; color:var(--text-muted);">املأ الاستمارة واضغط تأكيد الطلب</p>
+                    <p style="font-size:0.85rem; color:var(--text-muted);">املأ الاستمارة وسنقوم بالاتصال بك للتأكيد</p>
                 </div>
 
-                <form onsubmit="orderViaWhatsAppWithForm(event)">
+                <form id="orderForm" onsubmit="submitOrderToGoogleSheet(event)">
                     <div class="form-group">
                         <label>الاسم الكامل</label>
-                        <input type="text" id="c-name" class="form-input" placeholder="مثال: أحمد العلوي" required>
+                        <input type="text" name="name" id="c-name" class="form-input" placeholder="مثال: أحمد العلوي" required>
                     </div>
 
                     <div class="form-group">
                         <label>المدينة</label>
-                        <input type="text" id="c-city" class="form-input" placeholder="مثال: الدار البيضاء" required>
+                        <input type="text" name="city" id="c-city" class="form-input" placeholder="مثال: الدار البيضاء" required>
                     </div>
 
                     <div class="form-group">
                         <label>رقم الهاتف</label>
-                        <input type="tel" id="c-phone" class="form-input" placeholder="مثال: 0612345678" required>
+                        <input type="tel" name="phone" id="c-phone" class="form-input" placeholder="مثال: 0612345678" required>
                     </div>
 
                     <div class="benefits-list" style="margin:20px 0;">
@@ -89,18 +89,16 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="whatsapp-order-btn">
-                        <svg viewBox="0 0 32 32" class="wa-order-icon"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.475.642 4.85 1.863 6.963L2.3 29.7l6.9-1.808A13.926 13.926 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"/></svg>
-                        <span>تأكيد الطلب عبر الواتساب</span>
+                    <button type="submit" id="submit-btn" class="whatsapp-order-btn" style="background-color: var(--primary); color: #000; border: none; justify-content: center;">
+                        <span id="btn-text">تأكيد الطلب الآن</span>
                     </button>
                 </form>
 
                 <div class="wa-link">
-                    فريقنا جاهز للإجابة على استفساراتكم فوراً
+                    فريقنا سيقوم بالاتصال بك خلال 24 ساعة
                 </div>
             </div>
-
-        </div>
+            </div>
     </div>
 
     <div style="max-width:1200px; margin:0 auto 60px; padding:0 20px;">
