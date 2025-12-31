@@ -1,6 +1,6 @@
 /* =========================================
    PRUMYSL STORE - MAIN JAVASCRIPT
-   Restored Form Logic
+   Google Sheets Integrated
    ========================================= */
 
 // --- 1. PRODUCT DATABASE ---
@@ -304,36 +304,53 @@ window.changeImg = function(el, src) {
     }
 };
 
-/* --- NEW: WHATSAPP WITH FORM DATA --- */
-window.orderViaWhatsAppWithForm = function(e) {
+/* --- UPDATED: SEND ORDER TO GOOGLE SHEET --- */
+window.submitOrderToGoogleSheet = function(e) {
     e.preventDefault();
 
+    // 1. Get Elements
+    const btn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    
+    // 2. Visual Feedback (Loading)
+    const originalText = btnText.innerText;
+    btnText.innerText = "جاري تأكيد الطلب...";
+    btn.style.opacity = "0.7";
+    btn.disabled = true;
+
+    // 3. Collect Data
     const titleEl = document.getElementById('p-title');
     const priceEl = document.getElementById('p-price');
     const variantEl = document.getElementById('selected-variant');
-
-    // Get Form Data
-    const name = document.getElementById('c-name').value;
-    const city = document.getElementById('c-city').value;
-    const phone = document.getElementById('c-phone').value;
-
-    const product = titleEl ? titleEl.innerText : "Product";
-    const price = priceEl ? priceEl.innerText : "Price";
-    const variant = variantEl ? variantEl.value : 'Standard';
     
-    // Construct Professional Message
-    const msg = `*طلب جديد (Prumysl Store)* 📦\n\n` + 
-                `👤 *معلومات الزبون:*\n` +
-                `- الاسم: ${name}\n` +
-                `- المدينة: ${city}\n` +
-                `- الهاتف: ${phone}\n\n` +
-                `🛍️ *تفاصيل المنتج:*\n` +
-                `- المنتج: ${product}\n` +
-                `- النوع: ${variant}\n` +
-                `- الثمن: ${price}\n\n` +
-                `📍 المرجو تأكيد الطلب.`;
+    // Create FormData object
+    const data = new FormData();
+    data.append('name', document.getElementById('c-name').value);
+    data.append('city', document.getElementById('c-city').value);
+    data.append('phone', document.getElementById('c-phone').value);
     
-    window.open(`https://wa.me/212723496854?text=${encodeURIComponent(msg)}`, '_blank');
+    const productName = titleEl ? titleEl.innerText : "Unknown Product";
+    data.append('product', productName);
+    data.append('price', priceEl ? priceEl.innerText : "0 DH");
+    data.append('variant', variantEl ? variantEl.value : 'Standard');
+
+    // 4. Send to Google Sheets
+    // Using the URL provided
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxObVQD4mWwoNJVnUJcLKnpBYJ_3LvGFqjyxPa4Bg8j_jCLvVC99nrruy9E-jrsWm0/exec';
+
+    fetch(scriptURL, { method: 'POST', body: data })
+    .then(response => {
+        // 5. Success: Redirect to Thank You Page with Product Name
+        window.location.href = 'thankyou.html?product=' + encodeURIComponent(productName);
+    })
+    .catch(error => {
+        console.error('Error!', error.message);
+        alert("حدث خطأ في الاتصال، المرجو المحاولة مرة أخرى أو الاتصال بنا عبر الواتساب.");
+        // Reset Button
+        btnText.innerText = originalText;
+        btn.style.opacity = "1";
+        btn.disabled = false;
+    });
 };
 
 // Utilities
